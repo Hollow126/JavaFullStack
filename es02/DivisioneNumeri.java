@@ -1,4 +1,4 @@
-package Esecitazioni.es02;
+//package Esecitazioni.es02;
 
 import java.util.*;  // importate classe esterne 
 
