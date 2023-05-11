@@ -14,7 +14,7 @@ Con branch main, si crea e ci si sposta nel ramo main appena creato, di solito s
  si utilizza il carattere backtick per inserire una parte di codice 
  ``` System.Out.Printl(" prova del backtick ") ``` 
 
-# con il cancelletto si crea il titolo ""
+# con il cancelletto si crea il titolo
 
 - 1 con i trattini seguiti da spazio 
 - 2 si fanno gli elenci puntati 
