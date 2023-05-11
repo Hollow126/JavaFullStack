@@ -9,10 +9,12 @@ add commit e push vanno fatti in questo esatto ordine, per evitare casini
 Con branch main, si crea e ci si sposta nel ramo main appena creato, di solito si chiamava master, ma per questioni razziste viene modificato in main.
  
 
- per uscire dal log, si utilizza q
+per uscire dal log, si utilizza q
 
- si utilizza il carattere backtick per inserire una parte di codice 
- ``` System.Out.Printl(" prova del backtick ") ``` 
+tutti i file java dopo essere stati modificati vanno compilati, prima di fare ACP(add,commit,push), in modo che il file. class venga aggiunto correttamente 
+  
+si utilizza il carattere backtick per inserire una parte di codice 
+``` System.Out.Printl(" prova del backtick ") ``` 
 
 # con il cancelletto si crea il titolo
 
