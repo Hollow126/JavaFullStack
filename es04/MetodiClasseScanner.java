@@ -1,5 +1,3 @@
-package Esecitazioni.es04;
-
 /**
  * MetodiClasseScanner
  */

@@ -3,7 +3,7 @@
  * dare un messaggio specifico a differenza se l'utente è maggiorenne o meno
 */
 
-package Esecitazioni.es03;  // creazione Package
+// package Esecitazioni.es03;  // creazione Package
 
 import java.util.*;         // import liberia esterna per fare funzionare lo Scanner 
 
