@@ -17,7 +17,8 @@ public class CalcolaPerimetro
                 System.out.println("scrivi la altezza");
                 double altezza = Double.parseDouble(tastiera.nextLine());
                 double area = base*altezza;
-                System.out.println("l'area è " + area);
+                double perimetro = base*2 + altezza*2;
+                System.out.println("l'area è " + area + ", il perimetro è " + perimetro);
                 eInserito=true;
             } 
             catch (InputMismatchException e) 
