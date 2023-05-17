@@ -5,7 +5,6 @@
   
   public static void main(String[] args) 
   {
-    int i = 0;
      Scanner tastiera = new Scanner(System.in);
      List<String> merce = new ArrayList<String>();
      List<String> carrello = new ArrayList<String>();
@@ -26,6 +25,7 @@
          {
              carrello.add(mercePresa); 
              maxCapienzaCarrello++;  
+             System.out.println(carrello);
          } 
          else if (merce.remove(mercePresa) == false)
          {
