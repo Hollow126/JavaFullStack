@@ -1,4 +1,4 @@
-package esArray;
+package es06;
 
 import java.util.Random;
 

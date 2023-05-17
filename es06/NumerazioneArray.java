@@ -1,4 +1,4 @@
-package esArray;
+package es06;
 
 import java.util.*;
 
@@ -8,8 +8,8 @@ public class NumerazioneArray
     public static void main(String[] args) 
     {
         Scanner tastiera = new Scanner(System.in);
-        Random rand = new Random(); 
-        int upperbound = 14; 
+        //Random rand = new Random(); 
+        //int upperbound = 14; 
         int[] exampleArray = {1,2,3,4,5};
         // System.out.println("scrivi quanto grande vuoi l'array");
         // int dimensione = tastiera.nextInt();
