@@ -26,34 +26,47 @@ public class Negozio
         boolean importoPagato = false;
         while (importoPagato == false) 
         {
-            System.out.println("premi 1 per aggiungere un prodotto al carello, 2 per andare a pagare, 3 per vedere le merci, 4 per togliere un prodotto dal carrello,");
-            int scelta = Integer.parseInt(tastiera.nextLine());
-            switch (scelta) 
+            try 
             {
-            case 1:        
-                System.out.println("quale prodotto vuoi comprare ");
-                String inputUtente = tastiera.nextLine();
-                aggiungiAlCarrello(arraybidimensionaleStringNegozio,inputUtente,carello,portafoglio);
-                //stampaListaBidimensionale(arraybidimensionaleStringNegozio);
-                break;
-            case 2:
-                Pagamento(portafoglio, importoPagato);
-                break;
-            case 3:
-                stampaListaBidimensionale(arraybidimensionaleStringNegozio);
-                break;
-            case 4:
-                break;
-            default:
-                System.out.println("inserisci un valore valido");
-                break;
+                System.out.println("premi 1 per aggiungere un prodotto al carello, 2 per andare a pagare, 3 per vedere le merci, 4 per togliere un prodotto dal carrello,");
+                int scelta = Integer.parseInt(tastiera.nextLine());
+                String inputUtente = "";
+                switch (scelta) 
+                {
+                    case 1:        
+                        System.out.println("quale prodotto vuoi comprare ");
+                        inputUtente = tastiera.nextLine();
+                        aggiungiAlCarrello(arraybidimensionaleStringNegozio,inputUtente,carello,portafoglio);
+                        //stampaListaBidimensionale(arraybidimensionaleStringNegozio);
+                        break;
+                    case 2:
+                        Pagamento(portafoglio, importoPagato);
+                        break;
+                    case 3:
+                        stampaListaBidimensionale(arraybidimensionaleStringNegozio);
+                        break;
+                    case 4:
+                        System.out.println("quale prodotto vuoi rimuovere ");
+                        inputUtente = tastiera.nextLine();
+                        rimozioneProdottoCarrello(arraybidimensionaleStringNegozio,inputUtente,carello,portafoglio);
+                        break;
+                    default:
+                        System.out.println("inserisci un valore valido");
+                        break;
+                }
+            } 
+            catch (NumberFormatException e) 
+            {
+                System.out.println("errore nel formato di cio che hai scritto");
+                continue;
             }
+            
         }
-        
         tastiera.close();
     }
 
-    private static void stampaListaBidimensionale(String[][] listaBidimensionale) 
+
+    private static void stampaListaBidimensionale(String[][] listaBidimensionale)  // metodo per stampare la lista 
     {
         int rows = listaBidimensionale.length;
         int columns = listaBidimensionale[0].length;
@@ -85,6 +98,7 @@ public class Negozio
                     int quantitaAggiornata = Integer.parseInt(listaBidimensionale[i][2]) - 1;
                     listaBidimensionale[i][2] = Integer.toString(quantitaAggiornata);
                     carrello.add(listaBidimensionale[i][0]);
+                    System.out.println(portafoglio);
                     return;
                 }
                 else 
@@ -112,7 +126,14 @@ public class Negozio
             return;
         }
     }
+
+    private static void rimozioneProdottoCarrello(String[][] listaBidimensionale, String inputUtente, List<String> carrello, double portafoglio) 
+    {
+        // fare in modo che si rimuova il prodotto dalla lista, si riaggiunga al negozio e si alzino i soldi dal portafoglio 
+    }
+
 }
 
 
 
+// sistemare bug portafoglio che non funziona e mettere try catch nella prima parte con i continue per errori in inserimento portafoglio 

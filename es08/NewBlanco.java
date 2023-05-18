@@ -16,8 +16,8 @@ public class NewBlanco
         Scanner tastiera = new Scanner(System.in);
         System.out.println("Quanti soldi hai?");
         Double portafogli = tastiera.nextDouble();
-        int indice1 = 0;
-        int indice2 = 0;
+        //int indice1 = 0;
+        //int indice2 = 0;
         String mercePrezzo[][] = {{"carne ","pesce ","pane","latte"},{"10","20","30","40"}}; 
         System.out.println(mercePrezzo);
 
@@ -60,6 +60,7 @@ public class NewBlanco
       }
         System.out.println(carrello);
         System.out.println(portafogli);
+        tastiera.close();
      //if(portafogli > prezzoTotale){
            
         //}
