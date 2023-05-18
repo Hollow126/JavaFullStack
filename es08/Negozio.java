@@ -36,7 +36,7 @@ public class Negozio
                     case 1:        
                         System.out.println("quale prodotto vuoi comprare ");
                         inputUtente = tastiera.nextLine();
-                        aggiungiAlCarrello(arraybidimensionaleStringNegozio,inputUtente,carello,portafoglio);
+                        portafoglio = aggiungiAlCarrello(arraybidimensionaleStringNegozio,inputUtente,carello,portafoglio);
                         //stampaListaBidimensionale(arraybidimensionaleStringNegozio);
                         break;
                     case 2:
@@ -83,7 +83,7 @@ public class Negozio
 
 
 
-    private static void aggiungiAlCarrello(String[][] listaBidimensionale, String inputUtente, List<String> carrello, double portafoglio)
+    private static Double aggiungiAlCarrello(String[][] listaBidimensionale, String inputUtente, List<String> carrello, double portafoglio)
     {
         int rows = listaBidimensionale.length;
 
@@ -94,22 +94,24 @@ public class Negozio
                 if (Integer.parseInt(listaBidimensionale[i][2])>0) 
                 {
                     System.out.println(listaBidimensionale[i][0] + " aggiunta al carello");
-                    portafoglio = portafoglio - Double.parseDouble(listaBidimensionale[i][1]);
+                    //portafoglio = metodoAggiornamento(portafoglio, Double.parseDouble(listaBidimensionale[i][1]) );
                     int quantitaAggiornata = Integer.parseInt(listaBidimensionale[i][2]) - 1;
                     listaBidimensionale[i][2] = Integer.toString(quantitaAggiornata);
                     carrello.add(listaBidimensionale[i][0]);
+                    portafoglio = portafoglio - Double.parseDouble(listaBidimensionale[i][1]);
                     System.out.println(portafoglio);
-                    return;
+                    return portafoglio;
                 }
                 else 
                 {
                     System.out.println("prodotto: " + inputUtente + " terminato");
-                    return;
+                    return portafoglio;
                 }
                 
             }
         }
         System.out.println("prodotto non trovato ");
+        return portafoglio;
     }
     
     private static void Pagamento (double portafogli, boolean importopagato)
@@ -126,6 +128,14 @@ public class Negozio
             return;
         }
     }
+
+    // // public static double metodoAggiornamento(double valore, double prezzoDaTogliere ) 
+    // // {
+    // //     // Effettua le operazioni per aggiornare il valore
+    // //     valore = valore- prezzoDaTogliere; // Esempio di aggiornamento, puoi modificare questa parte a seconda delle tue esigenze
+
+    // //     return valore; // Restituisce il valore aggiornato
+    // // }
 
     private static void rimozioneProdottoCarrello(String[][] listaBidimensionale, String inputUtente, List<String> carrello, double portafoglio) 
     {
