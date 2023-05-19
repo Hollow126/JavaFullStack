@@ -23,12 +23,12 @@ public class Negozio
             arraybidimensionaleStringNegozio[i][2]= Integer.toString(rand.nextInt(upperboundquantita) + 1);
         }
         stampaListaBidimensionale(arraybidimensionaleStringNegozio);
-        boolean importoPagato = false;
+        boolean importoPagato = false;   // dicahiarata variabile per il quale fino a quando non è true, il programma continua a chiedere  numero a utente
         while (importoPagato == false) 
         {
             try 
             {
-                System.out.println("premi 1 per aggiungere un prodotto al carello, 2 per andare a pagare, 3 per vedere le merci, 4 per togliere un prodotto dal carrello,");
+                System.out.println("premi 1 per aggiungere un prodotto al carello, 2 per andare a pagare, 3 per vedere le merci,4 per vedere il carrello, 5 per togliere un prodotto dal carrello,");
                 int scelta = Integer.parseInt(tastiera.nextLine());
                 String inputUtente = "";
                 switch (scelta) 
@@ -40,15 +40,18 @@ public class Negozio
                         //stampaListaBidimensionale(arraybidimensionaleStringNegozio);
                         break;
                     case 2:
-                        Pagamento(portafoglio, importoPagato);
+                        importoPagato = Pagamento(portafoglio, importoPagato);
                         break;
                     case 3:
                         stampaListaBidimensionale(arraybidimensionaleStringNegozio);
                         break;
                     case 4:
+                        System.out.println(carello);
+                        break;
+                    case 5:
                         System.out.println("quale prodotto vuoi rimuovere ");
                         inputUtente = tastiera.nextLine();
-                        rimozioneProdottoCarrello(arraybidimensionaleStringNegozio,inputUtente,carello,portafoglio);
+                        portafoglio = rimozioneProdottoCarrello(arraybidimensionaleStringNegozio,inputUtente,carello,portafoglio);
                         break;
                     default:
                         System.out.println("inserisci un valore valido");
@@ -114,19 +117,21 @@ public class Negozio
         return portafoglio;
     }
     
-    private static void Pagamento (double portafogli, boolean importopagato)
+    private static boolean Pagamento (double portafogli, boolean importopagato)
     {
-        if (portafogli>0) 
+        if (portafogli>=0) 
         {
             System.out.println("importo pagato corettamente, ti sono rimasti " + portafogli + " $"); 
             importopagato=true; 
-            return;  
+            return importopagato;   
         } 
-        else if (portafogli<=0)
+        else if (portafogli<0)
         {
             System.out.println("non hai abbastanza soldi, togli qualcossa dal carrello ");
-            return;
+            importopagato=false; 
+            return importopagato;
         }
+        return importopagato;
     }
 
     // // public static double metodoAggiornamento(double valore, double prezzoDaTogliere ) 
@@ -137,13 +142,29 @@ public class Negozio
     // //     return valore; // Restituisce il valore aggiornato
     // // }
 
-    private static void rimozioneProdottoCarrello(String[][] listaBidimensionale, String inputUtente, List<String> carrello, double portafoglio) 
+    private static double rimozioneProdottoCarrello(String[][] listaBidimensionale, String inputUtente, List<String> carrello, double portafoglio) 
     {
-        // fare in modo che si rimuova il prodotto dalla lista, si riaggiunga al negozio e si alzino i soldi dal portafoglio 
+        int rows = listaBidimensionale.length;
+
+        for (int i = 0; i < rows; i++) 
+        { 
+            if (inputUtente.equalsIgnoreCase(listaBidimensionale[i][0])) 
+            {
+                    carrello.remove(listaBidimensionale[i][0]);
+                    System.out.println(listaBidimensionale[i][0] + " rimosso dal carello");
+                    int quantitaAggiornata = Integer.parseInt(listaBidimensionale[i][2]) + 1;
+                    listaBidimensionale[i][2] = Integer.toString(quantitaAggiornata);
+                    portafoglio = portafoglio + Double.parseDouble(listaBidimensionale[i][1]);
+                    System.out.println(portafoglio);
+                    return portafoglio;
+            }
+        }
+        System.out.println("prodotto mai aggiunto al carello ");
+        return portafoglio;
     }
 
 }
 
 
 
-// sistemare bug portafoglio che non funziona e mettere try catch nella prima parte con i continue per errori in inserimento portafoglio 
+// sistemare bug portafoglio che non funziona e mettere try catch nella prima parte con i continue per errori in inserimento portafoglio s
