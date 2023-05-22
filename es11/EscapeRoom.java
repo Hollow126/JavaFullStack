@@ -21,7 +21,7 @@ public class EscapeRoom
         while (uscitoDallaStanza == false && morto == false) 
         {
             System.out.println("il tempo di alzarti da terra vedi accendersi una sirena ed una luce si accenda con un timer rosso che sta scendendo il primo numero era 200 \n 199... \n 198... \n 197..");
-            System.out.println("dove vai ?  attorno a te vedi un grimaldello (1) , un armadio (2), un letto (3) , un muro con qualcosa scritto sopra di non ben preciso (4) \n il muro contenente la fiaccola (5), una porta sotto il timer (6), un bottone in un angolo (7),un comodino (8)   ");
+            System.out.println("dove vai ?  attorno a te vedi un grimaldello (1) ,una mattonella rotta (2), un letto (3) , un muro con qualcosa scritto sopra di non ben preciso (4) \n il muro contenente la fiaccola (5), una porta sotto il timer (6), un bottone in un angolo (7),un comodino (8) , un armadio (9)  ");
             inputUtente = Integer.parseInt(tastiera.nextLine());
             switch (inputUtente) {
                 case 1:
@@ -34,8 +34,8 @@ public class EscapeRoom
                         inventario.add("grimaldello");
                     }
                     break;
-                case 2:
-                    eventoArmadio(0);
+                case 9:
+                    eventoArmadio(mostroAllertato);
                 default:
                     break;
             }
@@ -56,8 +56,17 @@ public class EscapeRoom
         inventario.remove(inputUtente);
         System.out.println("il tuo inventario contiene: " + inventario);
     }
-    public static void eventoArmadio(List<String> inventario,List<String> oggettiStanza,String inputUtente) 
+
+    public static void eventoArmadio(boolean mostroAllertato) 
     {
+        if (mostroAllertato) {
+            
+        } 
+        else 
+        {
+            
+        }
+        // sevira a scappare poi dal mostro, se ce il mostro allertato puoi entrarci dentro, se non ce nessuno l'armadio è vuoto
         System.exit(0);
     }
 }
