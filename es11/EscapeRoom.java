@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.xml.namespace.QName;
+
 public class EscapeRoom 
 {
     public static void main(String[] args) 
@@ -17,26 +19,57 @@ public class EscapeRoom
         boolean morto = false;
         boolean mostroAllertato = false; 
         int inputUtente = 0;
+        System.out.println("il tempo di alzarti da terra vedi accendersi una sirena ed una luce si accenda con un timer rosso che sta scendendo il primo numero era 200 \n 199... \n 198... \n 197..");
+        
 
         while (uscitoDallaStanza == false && morto == false) 
         {
-            System.out.println("il tempo di alzarti da terra vedi accendersi una sirena ed una luce si accenda con un timer rosso che sta scendendo il primo numero era 200 \n 199... \n 198... \n 197..");
             System.out.println("dove vai ?  attorno a te vedi un grimaldello (1) ,una mattonella rotta (2), un letto (3) , un muro con qualcosa scritto sopra di non ben preciso (4) \n il muro contenente la fiaccola (5), una porta sotto il timer (6), un bottone in un angolo (7),un comodino (8) , un armadio (9)  ");
             inputUtente = Integer.parseInt(tastiera.nextLine());
             switch (inputUtente) {
                 case 1:
                     if (inventario.contains("grimaldello")) 
                     {
-                        System.out.println("non c'è niente altro");
+                        System.out.println("non c'è niente altro, torni indietro");
+                        break;
                     } 
                     else 
                     {
-                        inventario.add("grimaldello");
+                        aggiungiOggetto(inventario, stanza, "grimaldello");
+                        break;
                     }
+                case 2:
+                    System.out.println("la mattonella sembra muoversi ");
                     break;
+                case 5:
+                    if (inventario.contains("fiaccola")) 
+                    {
+                        System.out.println("non c'è niente altro, torni indietro");
+                        break;
+                    } 
+                    else 
+                    {
+                        System.out.println("raccogli la fiaccola");
+                        aggiungiOggetto(inventario, stanza, "fiaccola");
+                        break;
+                    }   
+                case 7:
+                    System.out.println("c'è un bottone in un angolo, lo premi ? ");
+                    if (tastiera.nextLine().equalsIgnoreCase("si")) 
+                    {
+                        System.out.println("dal muro si stacca una mattonella e una balestra ti spara, sei morto...");
+                        morto = true;    
+                        break;
+                    } 
+                    else 
+                    {
+                        System.out.println("ti guardi un attimo stranito e torni nel centro della stanza");
+                        break;
+                    }
                 case 9:
                     eventoArmadio(mostroAllertato);
                 default:
+                    System.out.println("Inserisci un numero valido, va bene essere spaesato, ma zio leggi le istruzioni....");
                     break;
             }
         }
