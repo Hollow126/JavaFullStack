@@ -17,7 +17,7 @@ public class EscapeRoom
         boolean uscitoDallaStanza = false;
         boolean morto = false;
         boolean mostroAllertato = false;
-        boolean oggettoUsatoCorrettamente = false;
+        boolean oggettoUsato = false;
         String inputUtente = "0";
         System.out.println("il tempo di alzarti da terra vedi accendersi una sirena ed una luce si accenda con un timer rosso che sta scendendo il primo numero era 200 \n 199... \n 198... \n 197..");
         
@@ -42,12 +42,12 @@ public class EscapeRoom
                     System.out.println("la mattonella sembra muoversi ");
                     System.out.println("se vuoi usare un oggetto digita il nome dell'oggetto altrimenti digita 0");
                     inputUtente = tastiera.nextLine();
-                    oggettoUsatoCorrettamente = usaOggetto(inventario,stanza,inputUtente,"grimaldello");
-                    if (oggettoUsatoCorrettamente == true) 
+                    oggettoUsato = usaOggettoRompendolo(inventario,stanza,inputUtente,"grimaldello");
+                    if (oggettoUsato == true) 
                     {
                         System.out.println("la mattonella si spacca");
                         inventario.add("pezzoDiMattonella");
-                    } 
+                    }
                     break;
                 case "5":
                     if (inventario.contains("fiaccola")) 
@@ -92,25 +92,55 @@ public class EscapeRoom
         System.out.println("il tuo inventario contiene: " + inventario);
     }
 
-    public static boolean usaOggetto(List<String> inventario,List<String> oggettiStanza,String inputUtente , String oggettocorretto) 
+    public static boolean usaOggettoRompendolo(List<String> inventario,List<String> oggettiStanza,String inputUtente , String oggettocorretto) 
     {
-        if (inventario.contains(inputUtente) && inputUtente == oggettocorretto) 
-        {
-            inventario.remove(inputUtente);
-            // System.out.println(inputUtente + "usato");
-            // System.out.println("il tuo inventario contiene: " + inventario);
-            return true;   
-        } 
-        else if (inputUtente!= oggettocorretto) 
-        {
-            System.out.println("non succede nulla");
-            return false;
-        }
-        else
-        {
-            System.out.println("nessun oggetto corrispondente");
-            return false;
-        }
+        if (inventario.contains(inputUtente) && inputUtente.equalsIgnoreCase(oggettocorretto)) 
+            {
+                inventario.remove(inputUtente);
+                // System.out.println(inputUtente + "usato");
+                // System.out.println("il tuo inventario contiene: " + inventario);
+                return true;   
+            } 
+            else if (!inventario.contains(inputUtente)) 
+            {
+                System.out.println("nessun oggetto corrispondente");
+                return false;
+            }
+            else if (inputUtente!= oggettocorretto)
+            {
+                System.out.println("provi a usare " + inputUtente + " ma non succede nulla");
+                return false;
+            }
+            else{
+                System.out.println("errore ");
+                return false;
+            }
+    }
+    
+
+    public static boolean usaOggettoMantenendolo(List<String> inventario,List<String> oggettiStanza,String inputUtente , String oggettocorretto) 
+    {
+        if (inventario.contains(inputUtente) && inputUtente.equalsIgnoreCase(oggettocorretto)) 
+            {
+                //inventario.remove(inputUtente);
+                // System.out.println(inputUtente + "usato");
+                // System.out.println("il tuo inventario contiene: " + inventario);
+                return true;   
+            } 
+            else if (!inventario.contains(inputUtente)) 
+            {
+                System.out.println("nessun oggetto corrispondente");
+                return false;
+            }
+            else if (inputUtente!= oggettocorretto)
+            {
+                System.out.println("provi a usare " + inputUtente + " ma non succede nulla");
+                return false;
+            }
+            else{
+                System.out.println("errore ");
+                return false;
+            }
     }
 
     public static void eventoArmadio(boolean mostroAllertato) 

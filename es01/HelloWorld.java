@@ -1,4 +1,4 @@
-//package Esecitazioni.es01;
+package es01;
 public class HelloWorld // commento
 {
     public static void main(String[] args) 
