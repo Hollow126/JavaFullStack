@@ -16,7 +16,8 @@ public class EscapeRoom
         boolean fineGioco = false;
         boolean uscitoDallaStanza = false;
         boolean morto = false;
-        boolean mostroAllertato = false; 
+        boolean mostroAllertato = false;
+        boolean oggettoUsatoCorrettamente = false;
         String inputUtente = "0";
         System.out.println("il tempo di alzarti da terra vedi accendersi una sirena ed una luce si accenda con un timer rosso che sta scendendo il primo numero era 200 \n 199... \n 198... \n 197..");
         
@@ -39,9 +40,14 @@ public class EscapeRoom
                     }
                 case "2":
                     System.out.println("la mattonella sembra muoversi ");
-                    if(inventario.contains("grimaldello") && usaOggetto(inventario,stanza,inputUtente)==true)
-
-
+                    System.out.println("se vuoi usare un oggetto digita il nome dell'oggetto altrimenti digita 0");
+                    inputUtente = tastiera.nextLine();
+                    oggettoUsatoCorrettamente = usaOggetto(inventario,stanza,inputUtente,"grimaldello");
+                    if (oggettoUsatoCorrettamente == true) 
+                    {
+                        System.out.println("la mattonella si spacca");
+                        inventario.add("pezzoDiMattonella");
+                    } 
                     break;
                 case "5":
                     if (inventario.contains("fiaccola")) 
@@ -88,12 +94,11 @@ public class EscapeRoom
 
     public static boolean usaOggetto(List<String> inventario,List<String> oggettiStanza,String inputUtente , String oggettocorretto) 
     {
-        System.out.println("se vuoi usare un oggetto digita il nome dell'oggetto altrimenti digita 0");
         if (inventario.contains(inputUtente) && inputUtente == oggettocorretto) 
         {
             inventario.remove(inputUtente);
-            System.out.println(inputUtente + "usato");
-            System.out.println("il tuo inventario contiene: " + inventario);
+            // System.out.println(inputUtente + "usato");
+            // System.out.println("il tuo inventario contiene: " + inventario);
             return true;   
         } 
         else if (inputUtente!= oggettocorretto) 
