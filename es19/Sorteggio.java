@@ -19,6 +19,7 @@ public class Sorteggio {
         }
 
         
+        
         System.out.println(studenti);
         int indiceArray = numeroStudenti;
         List<String> coppia = new ArrayList<String>();
