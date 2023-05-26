@@ -11,7 +11,6 @@ public class HorrorEscapeRoom
     {
         printAnimated("ti risvegli in una stanza buia illuminata solo dalla luce di una fiaccola mezza spenta \n la stanza nonostante sia in delle condizioni pessime, con del sangue ovunque ha comunque sia un qualcosa di moderno, vedi delle luci in cima ",80);
         Scanner tastiera = new Scanner(System.in);
-        List<String> stanza = new ArrayList<String>();
         List<String> inventario = new ArrayList<String>();
         boolean uscitoDallaStanza = false;
         boolean morto = false;
@@ -32,6 +31,7 @@ public class HorrorEscapeRoom
             System.out.println("dove vai ?  attorno a te vedi un grimaldello (1) ,una mattonella rotta (2)"); 
             System.out.println(" un letto (3) , un muro con qualcosa scritto sopra di non ben preciso (4)");
             System.out.println("il muro contenente la fiaccola (5), una porta sotto il timer (6), un bottone in un angolo (7),un comodino (8) , un armadio (9) , uno specchio (10)");
+            System.out.println("guarda il tuo inventario (11), unisci 2 oggeti (12)");
             inputUtente = tastiera.nextLine();
             switch (inputUtente) {
                 case "1":     //grimaldello
@@ -42,7 +42,7 @@ public class HorrorEscapeRoom
                     } 
                     else 
                     {
-                        aggiungiOggetto(inventario, stanza, "grimaldello");
+                        aggiungiOggetto(inventario, "grimaldello");
                         grimaldelloRaccolto = true;
                         break;
                     }
@@ -57,7 +57,7 @@ public class HorrorEscapeRoom
                     System.out.println("la mattonella sembra muoversi ");
                     System.out.println("se vuoi usare un oggetto digita il nome dell'oggetto altrimenti digita 0");
                     inputUtente = tastiera.nextLine();
-                    oggettoUsato = usaOggettoRompendolo(inventario,stanza,inputUtente,"grimaldello");
+                    oggettoUsato = usaOggettoRompendolo(inventario,inputUtente,"grimaldello");
                     if (oggettoUsato == true) 
                     {
                         System.out.println("la mattonella si spacca, hai raccolto un pezzoDiMattonella ");
@@ -76,13 +76,13 @@ public class HorrorEscapeRoom
                     System.out.println("il letto sembra richiamarti....");
                     System.out.println("se vuoi dormire premi si, se vuoi usare un oggetto digita il nome dell'oggetto altrimenti digita 0");
                     inputUtente = tastiera.nextLine();
-                    oggettoUsato = usaOggettoRompendolo(inventario,stanza,inputUtente,"siringa");
+                    oggettoUsato = usaOggettoRompendolo(inventario,inputUtente,"siringa");
                     if (inputUtente.equalsIgnoreCase("si")) 
                     {
                         System.out.println("provi a dormire, appena ti metti nel letto noti una figura osservarti");
                         System.out.println("vuoi provare ad usare un oggetto? digita il suo nome per usarlo");
                         inputUtente = tastiera.nextLine();
-                        oggettoUsato = usaOggettoMantenendolo(inventario, stanza, inputUtente, "crocifisso");
+                        oggettoUsato = usaOggettoMantenendolo(inventario, inputUtente, "crocifisso");
                         if (oggettoUsato == true) 
                         {
                             System.out.println("riesci a tirare fuori il crocifisso, lo punti contro la figura nera");
@@ -137,7 +137,7 @@ public class HorrorEscapeRoom
                     else 
                     {
                         System.out.println("raccogli la fiaccola");
-                        aggiungiOggetto(inventario, stanza, "fiaccola");
+                        aggiungiOggetto(inventario, "fiaccola");
                         break;
                     }
                 case "6":  // porta
@@ -145,8 +145,8 @@ public class HorrorEscapeRoom
                     {
                         System.out.println("ce una porta ma è chiusa,percepisci qualcosa di malvagio fuori dalla porta.....  \ndigita il nome di un oggetto per usarlo");
                         inputUtente = tastiera.nextLine();
-                        oggettoUsato = usaOggettoRompendolo(inventario,stanza,inputUtente,"grimaldello");
-                        oggettoUsato2 = usaOggettoMantenendolo(inventario, stanza, inputUtente, "crocifisso");
+                        oggettoUsato = usaOggettoRompendolo(inventario,inputUtente,"grimaldello");
+                        oggettoUsato2 = usaOggettoMantenendolo(inventario, inputUtente, "crocifisso");
                         if (oggettoUsato == true) 
                         {
                             System.out.println("provi a usare il grimaldello ma si rompe");
@@ -154,7 +154,7 @@ public class HorrorEscapeRoom
                         }
                         else if (oggettoUsato2 == true) 
                         {
-                            System.out.println("il crocifisso vibra");
+                            System.out.println("il crocifisso vibra se puntato verso la porta,  e vibrando sembra come se ci fosse qualcosa al suo interno");
                             break;
                         }
                         else if (oggettoUsato == false && oggettoUsato2 == false)
@@ -193,7 +193,7 @@ public class HorrorEscapeRoom
                     {
                         System.out.println("c'è un bottone in un angolo, digita si per premerlo, altrimenti scrivi un oggetto per usarlo ");
                         inputUtente = tastiera.nextLine();
-                        oggettoUsato = usaOggettoRompendolo(inventario, stanza, inputUtente, "pezzoDiMattonella");
+                        oggettoUsato = usaOggettoRompendolo(inventario,inputUtente, "pezzoDiMattonella");
                         if (inputUtente.equalsIgnoreCase("si")) 
                         {
                             System.out.println("dal muro si stacca una mattonella, una mano esce dal muro, ti prende e ti trascina con te....");
@@ -228,22 +228,35 @@ public class HorrorEscapeRoom
                 } 
                 else 
                 {
-                    System.out.println("apri il comodino, al suo interno trovi un crocifisso ed una siringa con un eticchetta con su scritto nightmare, le raccogli");
-                    System.out.println("vedi anche 2 foto bruciate, nella prima  si vede uno scienziato ed un prete dall'alto che osservano gruppi di persone divisi in coppie uccidersi tra loro");
-                    System.out.println("nella seconda si vede una bambina che dorme in un letto pieno di crocifissi ed una figura nera che la fissa ");
-                    aggiungiOggetto(inventario, stanza, "crocifisso");
-                    aggiungiOggetto(inventario, stanza, "siringa");
+                    printAnimated("apri il comodino, al suo interno trovi un crocifisso ed una siringa con un eticchetta con su scritto nightmare, le raccogli",100);
+                    printAnimated("vedi anche 2 foto bruciate, nella prima  si vede uno scienziato ed un prete dall'alto che osservano gruppi di persone divisi in coppie uccidersi tra loro",100);
+                    printAnimated("nella seconda si vede una bambina che dorme in un letto pieno di crocifissi ed una figura nera che la fissa ",100);
+                    aggiungiOggetto(inventario, "crocifisso");
+                    aggiungiOggetto(inventario, "siringa");
                     break;
                 }
                 case "9": //armadio
                     {
                         System.out.println("Ci sono delle ossa ed un teschio per terra, sembra che qualcuno si sia nascosto all'interno e sia morto soffocato");
+                        // inserisci la possibilità di mettere il primo pezzo di chiave (dare come hint chiave a forma di crocifisso )
                         break;
                     }
                 case "10": //specchio
                     {
                         printAnimated("Ti guardi allo specchio e non noti nulla di insolito",80);
-
+                        break;
+                    }  
+                case "11": //mostra inventario
+                    {
+                        System.out.println("il tuo inventario è " + inventario);
+                        break;
+                    }
+                case "12": //unisci 2 oggetti
+                    {
+                        System.out.println("il tuo inventario è " + inventario + " quali oggetti vuoi fondere? digita il nome di entrambi gli oggetti separati da una virgola ");
+                        inputUtente=tastiera.nextLine();
+                        unioneOggetti(inventario, inputUtente, "", "", "chiaveCrocifisso");
+                        break;
                     }   
                 default:
                     System.out.println("Inserisci un numero valido, va bene essere spaesato, ma zio leggi le istruzioni....");
@@ -304,7 +317,7 @@ public class HorrorEscapeRoom
                     } 
                     else 
                     {
-                        aggiungiOggetto(inventario, stanza, "grimaldello");
+                        aggiungiOggetto(inventario, "grimaldello");
                         grimaldelloRaccolto = true;
                         break;
                     } 
@@ -349,14 +362,13 @@ public class HorrorEscapeRoom
     }
 
 
-    public static void aggiungiOggetto(List<String> inventario, List<String> oggettiStanza, String oggettoDaRaccogliere ) 
+    public static void aggiungiOggetto(List<String> inventario, String oggettoDaRaccogliere ) 
     {
-        oggettiStanza.remove(oggettoDaRaccogliere);
         inventario.add(oggettoDaRaccogliere);
         System.out.println("il tuo inventario contiene: " + inventario);
     }
 
-    public static boolean usaOggettoRompendolo(List<String> inventario,List<String> oggettiStanza,String inputUtente , String oggettocorretto) 
+    public static boolean usaOggettoRompendolo(List<String> inventario,String inputUtente , String oggettocorretto) 
     {
         if (inventario.contains(inputUtente) && inputUtente.equalsIgnoreCase(oggettocorretto)) 
             {
@@ -383,7 +395,7 @@ public class HorrorEscapeRoom
     }
     
 
-    public static boolean usaOggettoMantenendolo(List<String> inventario,List<String> oggettiStanza,String inputUtente , String oggettocorretto) 
+    public static boolean usaOggettoMantenendolo(List<String> inventario,String inputUtente , String oggettocorretto) 
     {
         if (inventario.contains(inputUtente) && inputUtente.equalsIgnoreCase(oggettocorretto)) 
             {
@@ -408,6 +420,7 @@ public class HorrorEscapeRoom
                 return false;
             }
     }
+
     public static void messaggioOggettoUsatoO_NonCorretto(List<String> inventario,String inputUtente) 
     {
         if (!inventario.contains(inputUtente)) 
@@ -420,6 +433,20 @@ public class HorrorEscapeRoom
             System.out.println("provi a usare " + inputUtente + " ma non succede nulla");
         }
     }
+    public static void unioneOggetti(List<String> inventario,String inputUtente, String oggettoDaFondere1 ,String oggettoDaFondere2 , String oggettoFuso) 
+    {
+        String[] oggettiSingoli = inputUtente.split(",");
+        //prendi array di 
+        if ((oggettiSingoli[0].equalsIgnoreCase(oggettoDaFondere1) && oggettiSingoli[1].equalsIgnoreCase(oggettoDaFondere2)) || (oggettiSingoli[1].equalsIgnoreCase(oggettoDaFondere1) && oggettiSingoli[0].equalsIgnoreCase(oggettoDaFondere2)) ) 
+        {
+            inventario.add(oggettoFuso);
+        } 
+        else 
+        {
+            System.out.println("gli oggetti : " + oggettiSingoli[0] + " e " + oggettiSingoli[1] + " uniti, non fanno nulla");         
+        }
+    }
+
 
 
     public static void printAnimated(String action,int time) throws InterruptedException {
@@ -441,6 +468,9 @@ public class HorrorEscapeRoom
     parte del predatore fare in modo che possa uccidere la preda utilizzando il contaturni in modod che dia uan possibile azione alla preda 
 
     se apri la stanza e poi usi la siringa ottieni il finale segreto dove ci sono 2 mostri ed uscite dalla stanza 
+
+    inserire metodo fusione oggetti 
+    inserire la chiave sul muro ed una granata emp nel armadio 
 
     possibile implementazione per il futuro, fare che ci siano 2 giocatori 
  
