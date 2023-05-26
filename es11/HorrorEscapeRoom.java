@@ -485,6 +485,8 @@ public class HorrorEscapeRoom
     inserire metodo fusione oggetti 
     inserire la chiave sul muro ed una granata emp nel armadio 
 
+    //indovinello x preda dove puoi troVARE la granata emp, con indovinello da fare 
+
     possibile implementazione per il futuro, fare che ci siano 2 giocatori 
  
  
