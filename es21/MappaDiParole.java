@@ -39,6 +39,7 @@ public class MappaDiParole
     for (Map.Entry<String, Integer> entry : mappaParole.entrySet()) 
     {
       System.out.println(entry.getKey() + ": " + entry.getValue());
+      
     }
 
     input.close();

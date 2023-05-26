@@ -1,7 +1,9 @@
 package es11;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 
@@ -9,41 +11,52 @@ public class HorrorEscapeRoom
 {
     public static void main(String[] args) throws InterruptedException
     {
-        printAnimated("ti risvegli in una stanza buia illuminata solo dalla luce di una fiaccola mezza spenta \n la stanza nonostante sia in delle condizioni pessime, con del sangue ovunque ha comunque sia un qualcosa di moderno, vedi delle luci in cima ",80);
+        //printAnimated("ti risvegli in una stanza buia illuminata solo dalla luce di una fiaccola mezza spenta \n la stanza nonostante sia in delle condizioni pessime, con del sangue ovunque ha comunque sia un qualcosa di moderno, vedi delle luci in cima ",80);
         Scanner tastiera = new Scanner(System.in);
         List<String> inventario = new ArrayList<String>();
+        // mettere una mappa di stringhe int in modo che quando scegli una opzione la rimuovi dallla possibile scelta da fare, potenzialmente lo switch potrebbe non servire, ma meglio mantenerlo
+        Map<Integer,String> ListaSceltePreda1 = new HashMap<Integer ,String>();
+
+        ListaSceltePreda1.put(1, "vedi un grimaldello affianco a te");
+        ListaSceltePreda1.put(2, "una mattonella rotta");
+        ListaSceltePreda1.put(3, "un letto ");
+
         boolean uscitoDallaStanza = false;
         boolean morto = false;
-        boolean grimaldelloRaccolto = false;
         boolean nightmareMode = false;
         boolean oggettoUsato = false;
         boolean oggettoUsato2 = false;
         boolean portaAperta = false;
         String inputUtente = "0";
-        printAnimated("il tempo di alzarti da terra vedi accendersi una sirena ed una luce si accenda con un timer rosso che sta scendendo il primo numero era 200" ,80);
-        printAnimated("199...",100);
-        printAnimated("198...",100);
-        printAnimated("197...",100);
+       // printAnimated("il tempo di alzarti da terra vedi accendersi una sirena ed una luce si accenda con un timer rosso che sta scendendo il primo numero era 200" ,80);
+       // printAnimated("199...",100);
+       // printAnimated("198...",100);
+       // printAnimated("197...",100);
         
 
         while (uscitoDallaStanza == false && nightmareMode== false && morto == false) 
         {
-            System.out.println("dove vai ?  attorno a te vedi un grimaldello (1) ,una mattonella rotta (2)"); 
-            System.out.println(" un letto (3) , un muro con qualcosa scritto sopra di non ben preciso (4)");
-            System.out.println("il muro contenente la fiaccola (5), una porta sotto il timer (6), un bottone in un angolo (7),un comodino (8) , un armadio (9) , uno specchio (10)");
-            System.out.println("guarda il tuo inventario (11), unisci 2 oggeti (12)");
+            // System.out.println("dove vai ?  attorno a te vedi un grimaldello (1) ,una mattonella rotta (2)"); 
+            // System.out.println(" un letto (3) , un muro con qualcosa scritto sopra di non ben preciso (4)");
+            // System.out.println("il muro contenente la fiaccola (5), una porta sotto il timer (6), un bottone in un angolo (7),un comodino (8) , un armadio (9) , uno specchio (10)");
+            // System.out.println("guarda il tuo inventario (11), unisci 2 oggeti (12)");
+            for (Map.Entry<Integer, String> entry : ListaSceltePreda1.entrySet()) 
+            {
+              System.out.println(entry.getKey() + ": " + entry.getValue());
+            }
             inputUtente = tastiera.nextLine();
             switch (inputUtente) {
                 case "1":     //grimaldello
-                    if (inventario.contains("grimaldello") || grimaldelloRaccolto == true) 
+                    if (ListaSceltePreda1.containsKey(1)) 
                     {
-                        System.out.println("non c'è niente altro, torni indietro");
+                        //System.out.println("non c'è niente altro, torni indietro");
+                        aggiungiOggetto(inventario, "grimaldello");
+                        ListaSceltePreda1.remove(1);
                         break;
                     } 
                     else 
                     {
-                        aggiungiOggetto(inventario, "grimaldello");
-                        grimaldelloRaccolto = true;
+                        System.out.println("numero non valido");
                         break;
                     }
                 case "2": //mattonella rotta 
@@ -62,13 +75,14 @@ public class HorrorEscapeRoom
                     {
                         System.out.println("la mattonella si spacca, hai raccolto un pezzoDiMattonella ");
                         inventario.add("pezzoDiMattonella");
+                        ListaSceltePreda1.remove(2);
                         break;   
                     }
                     else
                     {
                         messaggioOggettoUsatoO_NonCorretto(inventario,inputUtente);
                         break; 
-                    }
+                    } 
                     
                 }
                 case "3": //letto
@@ -310,7 +324,7 @@ public class HorrorEscapeRoom
             inputUtente = tastiera.nextLine();
             switch (inputUtente) {
                 case "1":     //grimaldello
-                    if (inventario.contains("grimaldello") || grimaldelloRaccolto == true) 
+                    if (inventario.contains("grimaldello")) 
                     {
                         System.out.println("non c'è niente altro, torni indietro");
                         break;
@@ -318,7 +332,6 @@ public class HorrorEscapeRoom
                     else 
                     {
                         aggiungiOggetto(inventario, "grimaldello");
-                        grimaldelloRaccolto = true;
                         break;
                     } 
                 default:
