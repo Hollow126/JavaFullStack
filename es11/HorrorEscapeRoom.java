@@ -11,7 +11,6 @@ public class HorrorEscapeRoom
 {
     public static void main(String[] args) throws InterruptedException
     {
-        //printAnimated("ti risvegli in una stanza buia illuminata solo dalla luce di una fiaccola mezza spenta \n la stanza nonostante sia in delle condizioni pessime, con del sangue ovunque ha comunque sia un qualcosa di moderno, vedi delle luci in cima ",80);
         Scanner tastiera = new Scanner(System.in);
         List<String> inventario = new ArrayList<String>();
         // mettere una mappa di stringhe int in modo che quando scegli una opzione la rimuovi dallla possibile scelta da fare, potenzialmente lo switch potrebbe non servire, ma meglio mantenerlo
@@ -20,6 +19,16 @@ public class HorrorEscapeRoom
         ListaSceltePreda1.put(1, "vedi un grimaldello affianco a te");
         ListaSceltePreda1.put(2, "una mattonella rotta");
         ListaSceltePreda1.put(3, "un letto ");
+        ListaSceltePreda1.put(4, "un muro ombroso ");
+        ListaSceltePreda1.put(5, "una fiaccola sul muro ");
+        ListaSceltePreda1.put(6,"porta ");
+        ListaSceltePreda1.put(7, "bottone ");
+        ListaSceltePreda1.put(8, "comodino ");
+        ListaSceltePreda1.put(9, "armadio ");
+        ListaSceltePreda1.put(10, "specchio ");
+        ListaSceltePreda1.put(11, "inventario ");
+        ListaSceltePreda1.put(12, "fondi oggetti ");
+
 
         boolean uscitoDallaStanza = false;
         boolean morto = false;
@@ -32,23 +41,53 @@ public class HorrorEscapeRoom
        // printAnimated("199...",100);
        // printAnimated("198...",100);
        // printAnimated("197...",100);
-        
-
+        int velocitatesto;
+        System.out.println("inserisci la velocita del testo (1 = lenta,2 = media 3 = veloce)");
+        try 
+        {
+            velocitatesto = Integer.parseInt(tastiera.nextLine());
+            if (velocitatesto == 1) 
+            {
+                velocitatesto = 100;
+                printAnimated("hai scelto testo lento", velocitatesto);
+            } 
+            else if (velocitatesto==2) 
+            {
+                velocitatesto = 50;
+                printAnimated("hai scelto testo normale", velocitatesto);
+            }
+            else
+            {
+                velocitatesto =20;
+                printAnimated("hai scelto testo veloce", velocitatesto);
+            }  
+        } 
+        catch (NumberFormatException e) 
+        {
+            velocitatesto =30;
+            printAnimated("non hai scelto un valore valido, vbb tieniti il testo veloce", velocitatesto);
+        }
+        printAnimated("ti risvegli in una stanza buia illuminata solo dalla luce di una fiaccola mezza spenta \n la stanza nonostante sia in delle condizioni pessime, con del sangue ovunque ha comunque sia un qualcosa di moderno, vedi delle luci in cima ",velocitatesto);
         while (uscitoDallaStanza == false && nightmareMode== false && morto == false) 
         {
-            // System.out.println("dove vai ?  attorno a te vedi un grimaldello (1) ,una mattonella rotta (2)"); 
-            // System.out.println(" un letto (3) , un muro con qualcosa scritto sopra di non ben preciso (4)");
-            // System.out.println("il muro contenente la fiaccola (5), una porta sotto il timer (6), un bottone in un angolo (7),un comodino (8) , un armadio (9) , uno specchio (10)");
-            // System.out.println("guarda il tuo inventario (11), unisci 2 oggeti (12)");
             for (Map.Entry<Integer, String> entry : ListaSceltePreda1.entrySet()) 
             {
-              System.out.println(entry.getKey() + ": " + entry.getValue());
+              if (entry.getKey()% 2 == 0) 
+              {
+                System.out.println(entry.getKey() + ": " + entry.getValue() + " ");
+              } 
+              else 
+              {
+                System.out.print(entry.getKey() + ": " + entry.getValue() + "\t");
+              }  
+              
             }
             inputUtente = tastiera.nextLine();
             switch (inputUtente) {
                 case "1":     //grimaldello
                     if (ListaSceltePreda1.containsKey(1)) 
                     {
+                        printAnimated("raccogli il grimaldello da terra ",35);
                         //System.out.println("non c'è niente altro, torni indietro");
                         aggiungiOggetto(inventario, "grimaldello");
                         ListaSceltePreda1.remove(1);
@@ -60,31 +99,30 @@ public class HorrorEscapeRoom
                         break;
                     }
                 case "2": //mattonella rotta 
-                if (inventario.contains("pezzoDiMattonella")) 
-                {
-                    System.out.println("non c'è niente altro, torni indietro");
-                    break;
-                }
-                else 
-                {
-                    System.out.println("la mattonella sembra muoversi ");
-                    System.out.println("se vuoi usare un oggetto digita il nome dell'oggetto altrimenti digita 0");
-                    inputUtente = tastiera.nextLine();
-                    oggettoUsato = usaOggettoRompendolo(inventario,inputUtente,"grimaldello");
-                    if (oggettoUsato == true) 
+                    if (ListaSceltePreda1.containsKey(2)) 
                     {
-                        System.out.println("la mattonella si spacca, hai raccolto un pezzoDiMattonella ");
-                        inventario.add("pezzoDiMattonella");
-                        ListaSceltePreda1.remove(2);
-                        break;   
+                        System.out.println("la mattonella sembra muoversi ");
+                        System.out.println("se vuoi usare un oggetto digita il nome dell'oggetto altrimenti digita 0");
+                        inputUtente = tastiera.nextLine();
+                        oggettoUsato = usaOggettoRompendolo(inventario,inputUtente,"grimaldello");
+                        if (oggettoUsato == true) 
+                        {
+                            System.out.println("la mattonella si spacca, hai raccolto un pezzoDiMattonella ");
+                            inventario.add("pezzoDiMattonella");
+                            ListaSceltePreda1.remove(2);
+                            break;   
+                        }
+                        else
+                        {
+                            messaggioOggettoUsatoO_NonCorretto(inventario,inputUtente);
+                            break; 
+                        } 
                     }
-                    else
+                    else 
                     {
-                        messaggioOggettoUsatoO_NonCorretto(inventario,inputUtente);
-                        break; 
-                    } 
-                    
-                }
+                        System.out.println("numero non valido");
+                        break;
+                    }
                 case "3": //letto
                 {
                     System.out.println("il letto sembra richiamarti....");
@@ -130,30 +168,38 @@ public class HorrorEscapeRoom
                     }
                 }
                 case "4":  // il muro oscuro
-                {
-                    if (inventario.contains("fiaccola")) 
+                    if (ListaSceltePreda1.containsKey(4)) 
                     {
-                        printAnimated("sul muro vedi una croce, una scritta che riporta \n \"the nightmare is the answer\" \n assieme ad un disegno che raffigura una persona che assomiglia a te, insieme ad un altra persona con le sembianze da mostro, divisa da un muro  ", 100);
-                        break;
-                    } 
+                        if (inventario.contains("fiaccola")) 
+                        {
+                            printAnimated("Utilizzi la fiaccola per fare luce. sul muro vedi una croce, una scritta che riporta \n \"the nightmare is the answer\" \n assieme ad un disegno che raffigura una persona che assomiglia a te, insieme ad un altra persona con le sembianze da mostro, divisa da un muro  ", 100);
+                            ListaSceltePreda1.remove(4);
+                            break;
+                        } 
+                        else 
+                        {
+                            System.out.println("non riesci a vedere nulla... il muro è troppo scuro");
+                            break;
+                        }
+                    }
                     else 
                     {
-                        System.out.println("non riesci a vedere nulla... il muro è troppo scuro");
+                        System.out.println("numero non valido");
                         break;
                     }
-                }
                 case "5": // fiaccola
-                    if (inventario.contains("fiaccola")) 
-                    {
-                        System.out.println("non c'è niente altro, torni indietro");
-                        break;
-                    } 
-                    else 
-                    {
-                        System.out.println("raccogli la fiaccola");
-                        aggiungiOggetto(inventario, "fiaccola");
-                        break;
-                    }
+                if (ListaSceltePreda1.containsKey(5)) 
+                {
+                    System.out.println("raccogli la fiaccola");
+                    aggiungiOggetto(inventario, "fiaccola");
+                    ListaSceltePreda1.remove(5);
+                    break;
+                } 
+                else 
+                {
+                    System.out.println("numero non valido");
+                    break;
+                }
                 case "6":  // porta
                     if(portaAperta == false)
                     {
@@ -203,61 +249,80 @@ public class HorrorEscapeRoom
                         }
                     }
                 case "7": //bottone
-                    if (portaAperta == false) 
+                    if (ListaSceltePreda1.containsKey(7)) 
                     {
-                        System.out.println("c'è un bottone in un angolo, digita si per premerlo, altrimenti scrivi un oggetto per usarlo ");
-                        inputUtente = tastiera.nextLine();
-                        oggettoUsato = usaOggettoRompendolo(inventario,inputUtente, "pezzoDiMattonella");
-                        if (inputUtente.equalsIgnoreCase("si")) 
+                        if (portaAperta == false) 
                         {
-                            System.out.println("dal muro si stacca una mattonella, una mano esce dal muro, ti prende e ti trascina con te....");
-                            printAnimated("SEI MORTO",200);
-                            morto = true;    
-                            break;
-                        } 
-                        else if (oggettoUsato == true)
-                        {
-                            System.out.println("noti un pezzo di muro che sembra muoversi, lo copri con la mattonella");
-                            System.out.println("la porta si apre");
-                            portaAperta=true;
-                            break;
-                        }
-                        else
-                        {
-                            messaggioOggettoUsatoO_NonCorretto(inventario, inputUtente);
-                            System.out.println("ti guardi stranito e torni al centro della stanza");
-                            break;
-                        }
-                    } 
+                            System.out.println("c'è un bottone in un angolo, digita si per premerlo, altrimenti scrivi un oggetto per usarlo ");
+                            inputUtente = tastiera.nextLine();
+                            oggettoUsato = usaOggettoRompendolo(inventario,inputUtente, "pezzoDiMattonella");
+                            if (inputUtente.equalsIgnoreCase("si")) 
+                            {
+                                System.out.println("dal muro si stacca una mattonella, una mano esce dal muro, ti prende e ti trascina con te....");
+                                printAnimated("SEI MORTO",200);
+                                morto = true;    
+                                break;
+                            } 
+                            else if (oggettoUsato == true)
+                            {
+                                System.out.println("noti un pezzo di muro che sembra muoversi, lo copri con la mattonella");
+                                System.out.println("la porta si apre");
+                                portaAperta=true;
+                                ListaSceltePreda1.remove(7);
+                                break;
+                            }
+                            else
+                            {
+                                messaggioOggettoUsatoO_NonCorretto(inventario, inputUtente);
+                                System.out.println("ti guardi stranito e torni al centro della stanza");
+                                break;
+                            }
+                        }                     
+                    }   
                     else 
                     {
-                        System.out.println("non c'è nient'altro");
+                        System.out.println("numero non valido");
                         break;
                     }
                 case "8": //comodino
-                if (inventario.contains("crocifisso")) 
-                {
-                    System.out.println("non c'è niente altro, torni indietro");
-                    break;
-                } 
-                else 
+                if (ListaSceltePreda1.containsKey(8)) 
                 {
                     printAnimated("apri il comodino, al suo interno trovi un crocifisso ed una siringa con un eticchetta con su scritto nightmare, le raccogli",100);
                     printAnimated("vedi anche 2 foto bruciate, nella prima  si vede uno scienziato ed un prete dall'alto che osservano gruppi di persone divisi in coppie uccidersi tra loro",100);
                     printAnimated("nella seconda si vede una bambina che dorme in un letto pieno di crocifissi ed una figura nera che la fissa ",100);
                     aggiungiOggetto(inventario, "crocifisso");
                     aggiungiOggetto(inventario, "siringa");
+                    ListaSceltePreda1.remove(8);
+                    break;
+                } 
+                else 
+                {
+                    System.out.println("numero non valido");
                     break;
                 }
                 case "9": //armadio
+                    if (ListaSceltePreda1.containsKey(9)) 
                     {
                         System.out.println("Ci sono delle ossa ed un teschio per terra, sembra che qualcuno si sia nascosto all'interno e sia morto soffocato");
+                        ListaSceltePreda1.remove(9);
                         // inserisci la possibilità di mettere il primo pezzo di chiave (dare come hint chiave a forma di crocifisso )
                         break;
                     }
+                    else
+                    {
+                        System.out.println("numero non valido");
+                    }    
                 case "10": //specchio
+                    if (ListaSceltePreda1.containsKey(10)) 
                     {
                         printAnimated("Ti guardi allo specchio e non noti nulla di insolito",80);
+                        ListaSceltePreda1.remove(10);
+                        // inserisci la possibilità di mettere il primo pezzo di chiave (dare come hint chiave a forma di crocifisso )
+                        break;
+                    }    
+                    else
+                    {
+                        System.out.println("numero non valido");
                         break;
                     }  
                 case "11": //mostra inventario
@@ -449,14 +514,22 @@ public class HorrorEscapeRoom
     public static void unioneOggetti(List<String> inventario,String inputUtente, String oggettoDaFondere1 ,String oggettoDaFondere2 , String oggettoFuso) 
     {
         String[] oggettiSingoli = inputUtente.split(",");
-        //prendi array di 
-        if ((oggettiSingoli[0].equalsIgnoreCase(oggettoDaFondere1) && oggettiSingoli[1].equalsIgnoreCase(oggettoDaFondere2)) || (oggettiSingoli[1].equalsIgnoreCase(oggettoDaFondere1) && oggettiSingoli[0].equalsIgnoreCase(oggettoDaFondere2)) ) 
+        if (oggettiSingoli.length==0) 
         {
-            inventario.add(oggettoFuso);
+            System.out.println("inserisci le parole staccandole da una virgola ");    
         } 
         else 
         {
-            System.out.println("gli oggetti : " + oggettiSingoli[0] + " e " + oggettiSingoli[1] + " uniti, non fanno nulla");         
+         //prendi array di 
+            if ((oggettiSingoli[0].equalsIgnoreCase(oggettoDaFondere1) && oggettiSingoli[1].equalsIgnoreCase(oggettoDaFondere2)) || (oggettiSingoli[1].equalsIgnoreCase(oggettoDaFondere1) && oggettiSingoli[0].equalsIgnoreCase(oggettoDaFondere2)) ) 
+            {
+                System.out.println("hai utilizzato gli oggetti : " + oggettiSingoli[0] + " e " + oggettiSingoli[1] + " ed hai creato " + oggettoFuso);         
+                inventario.add(oggettoFuso);
+            } 
+            else 
+            {
+                System.out.println("gli oggetti : " + oggettiSingoli[0] + " e " + oggettiSingoli[1] + " uniti, non fanno nulla");         
+            }
         }
     }
 
@@ -489,6 +562,8 @@ public class HorrorEscapeRoom
 
     possibile implementazione per il futuro, fare che ci siano 2 giocatori 
  
+
+    // provare a fare un if, ad esempio nella parte del letto, per fare partire il metodo solo se ha lìoggetto nell'inventario e nel else dare errore oggeto non riconosciuto
  
 
  * 
