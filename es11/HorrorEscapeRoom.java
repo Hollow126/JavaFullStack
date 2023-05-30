@@ -565,6 +565,7 @@ public class HorrorEscapeRoom
 
     // provare a fare un if, ad esempio nella parte del letto, per fare partire il metodo solo se ha lìoggetto nell'inventario e nel else dare errore oggeto non riconosciuto
  
+    // correggere metodo unione oggeto nel caso non vi siano inserite virgole e vi sia solo un elemento nell'array 
 
  * 
 */
