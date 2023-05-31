@@ -26,8 +26,9 @@ public class HorrorEscapeRoom
         ListaSceltePreda1.put(8, "comodino ");
         ListaSceltePreda1.put(9, "armadio ");
         ListaSceltePreda1.put(10, "specchio ");
-        ListaSceltePreda1.put(11, "inventario ");
-        ListaSceltePreda1.put(12, "fondi oggetti ");
+        ListaSceltePreda1.put(11, "fessura a forma di cuore");
+        ListaSceltePreda1.put(20, "inventario ");
+        ListaSceltePreda1.put(30, "fondi oggetti ");
 
 
         boolean uscitoDallaStanza = false;
@@ -289,7 +290,7 @@ public class HorrorEscapeRoom
                     aggiungiOggetto(inventario, "crocifisso");
                     aggiungiOggetto(inventario, "siringa");
                     ListaSceltePreda1.remove(8);
-                    ListaSceltePreda1.put(13,"osserva crocifisso");
+                    ListaSceltePreda1.put(12,"osserva crocifisso");
                     break;
                 } 
                 else 
@@ -301,9 +302,23 @@ public class HorrorEscapeRoom
                     if (ListaSceltePreda1.containsKey(9)) 
                     {
                         printAnimated("Ci sono delle ossa ed un teschio per terra, sembra che qualcuno si sia nascosto all'interno e sia morto soffocato", velocitatesto);
-                        ListaSceltePreda1.remove(9);
-                        // inserisci la possibilità di mettere il primo pezzo di chiave (dare come hint chiave a forma di crocifisso )
-                        break;
+                        printAnimated("in mezzo alle ossa scorgi una chiave con una serratura a forma di croce", velocitatesto);
+                        printAnimated("scrivi il nome dell'oggetto se vuoi usarlo", velocitatesto);
+                        inputUtente = tastiera.nextLine();
+                        oggettoUsato = usaOggettoRompendolo(inventario,inputUtente, "chiaveCrocifisso");
+                        if (oggettoUsato == true) 
+                        {
+                            printAnimated("usi la chiaveCrocifisso ed apri la porta, al suo interno trovi una armatura nera e spinosa, la raccogli e la indossi ", velocitatesto);
+                            printAnimated("subito dopo averla indossata ti senti fortissimo....", velocitatesto);
+                            inventario.add("armaturaNera");
+                            ListaSceltePreda1.remove(9);
+                            break;   
+                        }
+                        else
+                        {
+                            messaggioOggettoUsatoO_NonCorretto(inventario,inputUtente);
+                            break; 
+                        } 
                     }
                     else
                     {
@@ -321,38 +336,43 @@ public class HorrorEscapeRoom
                     {
                         System.out.println("numero non valido");
                         break;
-                    }  
-                case "11": //mostra inventario
-                    {
-                        System.out.println("il tuo inventario è " + inventario);
-                        break;
                     }
-                case "12": //unisci 2 oggetti
+                case "11": // fessura a forma di cuore  
+                {
+                    printAnimated("sopra il letto vi è un buco a forma di cuore umano, sembra come se ci si possa inserire qualcosa dentro", velocitatesto);
+                    ListaSceltePreda1.remove(11);
+                }
+                case "12": //osserva il crocifisso 
+                    if (ListaSceltePreda1.containsKey(12)) 
                     {
-                        System.out.println("il tuo inventario è " + inventario + " quali oggetti vuoi fondere? digita il nome di entrambi gli oggetti separati da una virgola ");
-                        inputUtente=tastiera.nextLine();
-                        unioneOggetti(inventario, inputUtente, "fiaccola", "crocifisso", "chiaveCrocifisso");
-                        break;
-                    }
-                case "13": //osserva il crocifisso 
-                    if (ListaSceltePreda1.containsKey(13)) 
-                    {
-                        printAnimated("il crocifisso sembra emanare un energia strana, scuotendolo sembra ci sia qualcosa al suo interno", velocitatesto);
-                        ListaSceltePreda1.remove(13);
+                        printAnimated("il crocifisso sembra emanare un energia strana, scuotendolo sembra ci sia qualcosa al suo interno, magari sciogliendolo, si puo ottenere il contenuto al suo interno", velocitatesto);
+                        ListaSceltePreda1.remove(12);
                         break;
                     }
                     else
                     {
                         System.out.println("numero non valido ");
                         break;
-                    }     
+                    }      
+                case "20": //mostra inventario
+                    {
+                        System.out.println("il tuo inventario è " + inventario);
+                        break;
+                    }
+                case "30": //unisci 2 oggetti
+                    {
+                        System.out.println("il tuo inventario è " + inventario + " quali oggetti vuoi fondere? digita il nome di entrambi gli oggetti separati da una virgola ");
+                        inputUtente=tastiera.nextLine();
+                        unioneOggetti(inventario, inputUtente, "fiaccola", "crocifisso", "chiaveCrocifisso");
+                        break;
+                    }  
                 default:
                     System.out.println("Inserisci un numero valido, va bene essere spaesato, ma zio leggi le istruzioni....");
                     break;
             }
         }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// continua a giocare ma la stanza e diversa finche non esci ( quindi non esci dalla porta)
+// diventi te il mostro e ti svegli nell'altra stanza
         while(uscitoDallaStanza == false && nightmareMode == true && morto == false)
         {
             int contaturni = 1;
@@ -421,6 +441,14 @@ public class HorrorEscapeRoom
 // mostro lo vedi ma non puoi combatterlo,puoi solo fuggire ma morirai comunque nell'armadio, se usi il crocifisso muori, l'unico modo è scappare via usando i 2 pezzi di chiave
         while(uscitoDallaStanza== true && nightmareMode == false  && morto == false)
         {
+            if (inventario.contains("armaturaNera")) 
+            {
+                printAnimated("uccidi il mostro combattendolo, non riesci a fermare l'armatura", velocitatesto);
+            } 
+            else 
+            {
+                //vieni attaccato dal mostro dopo 3 turni, puoi scappare (aramdio) ( combattimento con i dadi ) ma muori sempre a meno che non usi la siringa    
+            }
             System.out.println("continua 2, sei uscito dalla stanza "); 
             // inserisci il combattimento, evento armadio ed il dialogo, inserici lo specchio  
         
@@ -566,16 +594,19 @@ public class HorrorEscapeRoom
     se apri la stanza e poi usi la siringa ottieni il finale segreto dove ci sono 2 mostri ed uscite dalla stanza 
 
     inserire metodo fusione oggetti 
-    inserire la chiave sul muro ed una granata emp nel armadio 
-
-    //indovinello x preda dove puoi troVARE la granata emp, con indovinello da fare 
 
     possibile implementazione per il futuro, fare che ci siano 2 giocatori 
- 
 
     // provare a fare un if, ad esempio nella parte del letto, per fare partire il metodo solo se ha lìoggetto nell'inventario e nel else dare errore oggeto non riconosciuto
  
     // correggere metodo unione oggeto nel caso non vi siano inserite virgole e vi sia solo un elemento nell'array 
 
+    //IMPORTANTE aggiungere il cuore sul muro all'inizio del gioco, con l'armatura nera potrai uccidere il mostro se non entri in nightmare mode e finire il gioco senza la siringa, uscendo dal laboratorio facendo vincere lo scienziato 
+
+    dare come intro se scegliere il sacerdote o lo scienziato, se usi il scienzato, parti in modalita nightmare (predatore), se scegli il sacerdote parti in modalita preda
+
+    true ending, i 2 mostri assieme se usi la siringa con l'armatura
+    
+    finale segreto liguria digitale appare
  * 
 */
