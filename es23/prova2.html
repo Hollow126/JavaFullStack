@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing page</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="hero">
+        <h1>Il Mio Sito Full Stack</h1>
+        <p>Scopri le mie competenze nello sviluppo full stack.</p>
+    </div>
+    <div class="menu">
+        <a href="#backend">Sviluppo Backend</a>
+        <a href="#frontend">Sviluppo Frontend</a>
+        <a href="#database">Gestione Database</a>
+        <a href="#oop">Object Oriented</a>
+        <a href="#contact">Form Contatti</a>
+    </div>
+
+    <div class="container">
+        <div class="section" id="backend">
+            
+            <div class="card">
+                <img src="./img/for-business.svg" alt="Backend Development">
+                <i class="fas fa-8x fa-brands fa-node" style="color: #00ad42;"></i>
+                <p>Competenze in Node.js, Express.js, Python, Django, Ruby on Rails, ecc.</p>
+            </div>
+            <div class="card">
+                <img src="./img/for-designers.svg" alt="Backend Development">
+                <h2>Express.js</h2>
+                <p>Competenze in Node.js, Express.js, Python, Django, Ruby on Rails, ecc.</p>
+            </div>
+            <div class="card">
+                <img src="./img/for-marketers.svg" alt="Backend Development">
+                <h2>Django</h2>
+                <p>Competenze in Node.js, Express.js, Python, Django, Ruby on Rails, ecc.</p>
+            </div>
+        </div>
+        <div class="section" id="frontend">
+            <div class="card">
+                <img src="./img/for-designers.svg" alt="Frontend Development">
+                <h2>Sviluppo Frontend</h2>
+                <p>Competenze in HTML, CSS, JavaScript, React.js, Vue.js, Angular.js, ecc.</p>
+            </div>
+            <div class="card">
+                <img src="./img/for-designers.svg" alt="Frontend Development">
+                <h2>Sviluppo Frontend</h2>
+                <p>Competenze in HTML, CSS, JavaScript, React.js, Vue.js, Angular.js, ecc.</p>
+            </div>
+            <div class="card">
+                <img src="./img/for-designers.svg" alt="Frontend Development">
+                <h2>Sviluppo Frontend</h2>
+                <p>Competenze in HTML, CSS, JavaScript, React.js, Vue.js, Angular.js, ecc.</p>
+            </div>
+        </div>
+        <div class="section" id="database">
+            <div class="card">
+                <img src="./img/for-everyone.svg" alt="Database Management">
+                <h2>Gestione Database</h2>
+                <p>Competenze in MySQL, PostgreSQL, MongoDB, Firebase, ecc.</p>
+            </div>
+            <div class="card">
+                <img src="./img/for-everyone.svg" alt="Database Management">
+                <h2>Gestione Database</h2>
+                <p>Competenze in MySQL, PostgreSQL, MongoDB, Firebase, ecc.</p>
+            </div>
+            <div class="card">
+                <img src="./img/for-everyone.svg" alt="Database Management">
+                <h2>Gestione Database</h2>
+                <p>Competenze in MySQL, PostgreSQL, MongoDB, Firebase, ecc.</p>
+            </div>
+        </div>
+        <div class="section" id="oop">
+            <div class="card">
+                <img src="./img/for-designers.svg" alt="Object-Oriented Programming">
+                <h2>Programmazione Orientata agli Oggetti</h2>
+                <p>Competenze in Java, C++, Python, ecc.</p>
+            </div>
+            <div class="card">
+                <img src="./img/for-business.svg" alt="Object-Oriented Programming">
+                <h2>Programmazione Orientata agli Oggetti</h2>
+                <p>Competenze in Java, C++, Python, ecc.</p>
+            </div>
+            <div class="card">
+                <img src="./img/" alt="Object-Oriented Programming">
+                <h2>Programmazione Orientata agli Oggetti</h2>
+                <p>Competenze in Java, C++, Python, ecc.</p>
+            </div>
+        </div>
+        <div class="section" id="contact">
+            <h2>Contattami</h2>
+            <form action="/submit_form" method="POST">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Messaggio:</label>
+                <textarea id="message" name="message" required></textarea>
+                <input type="submit" value="Invia">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

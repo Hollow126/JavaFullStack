@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.5rem;
+}
+
+header {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 90%;
+    margin: auto;
+}
+
+.mainMenu {
+    display: flex;
+    justify-content: end;
+
+}
+
+.mainMenu li {
+    margin-right: 100px;
+    list-style-type: none;
+}
+
+.mainMenu li a {
+    text-decoration: none;
+}
+
+.mainMenu li:last-child {
+    margin-right: 0px;
+}
+
+#logo {
+    width: 40px;
+    height: auto;
+    margin: 8px 0;
+}
+
+.main-content {
+    max-width: 75%;
+    margin: auto;
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+.card {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 40px 8px;
+    border-radius: 16px;
+    transition: 0.1s ease-in-out;
+}
+
+.card:hover{
+    transform: scale(1.03);
+}
+
+.card img {
+   width: 100%;
+}
+
+.card p {
+    text-align: center;
+    
+}
+.card .pkm-name{
+    margin: 8px 0;
+    font-size: 1rem;
+}
+.card .pkm-types{
+    display: flex;
+    justify-content: center; 
+    gap: 8px;
+}
+
+.card .pkm-types .pkm-btn-types{
+    border: 1px solid red;
+    padding: 8px 32px;
+    background-color: red;
+}

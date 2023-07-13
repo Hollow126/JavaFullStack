@@ -21,6 +21,7 @@ public class CodaBanca
             coda.add(i);
             System.out.println(coda);
         }
+        
         while (!coda.isEmpty()) 
         {   
             int tempoCliente = (ransRandom.nextInt(limiteTempo)+1);
