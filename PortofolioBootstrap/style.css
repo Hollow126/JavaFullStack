@@ -1,0 +1,72 @@
+*{
+    font-family: 'Press Start 2P', cursive;
+}
+
+body{
+    background-color: #020202;
+}
+
+.first-card-row{
+    margin-top: 10%;
+    margin-bottom: 5px;
+}
+
+.card-row{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.img-container{
+display: flex;
+justify-content: center;
+}
+
+
+.card-img-top{
+    max-width: 10rem;
+    max-height: 10rem;
+
+}
+
+.card-title{
+    text-align: center;
+}
+
+.card text{
+    text-align: center;
+}
+
+.divScroll {              /* div container of the scrolbar inside the card*/
+    margin-top: 0.5rem;
+    overflow:scroll;
+    height:100px;
+}
+
+.card:hover{                    /* animation of the card */
+    transform: scale(1.01);
+    border:solid;
+    border-color: greenyellow;
+}
+
+::-webkit-scrollbar {    /* these four rules are for the customization of the scrollbar inside the card */
+    width: 0.5px;
+    height: 0.5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+
+  

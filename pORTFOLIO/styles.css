@@ -124,22 +124,76 @@ nav {
     justify-content: end;
 }
 
+.progress{
+    display: flex;
+    margin-bottom: 60px;
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+}
+.progress .name{
+    width: 20%;
+}
+.progress .progress-bar{
+    width: 0;
+    height: 20px;
+    margin: 0 0.3rem;
+    justify-content: flex-end;
+    border-style: solid;
+    border-color: white;
+    transition: widht 2s;    
+    background-color: #4caf50;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 0.8em;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+    transition: width 2s;
+}
+
+.name{
+    margin-left: 225px;
+}
+
+.progress-bar:hover{
+    transform: scale(1.03);
+    box-shadow: rgba(149, 157, 165, 0.2)5px 5px 5px;
+    
+}
+
 @media only screen and (max-width: 600px) {
 
-    
-.main-content .title {
-    max-width: 100%;
-}
 
-.card{
-    display: block;
-}
-.card .anni{
-    width: 100%;
-    margin: 16px 0 ;
-}
-.card .job{
-    margin: 0px;
-}
+    .main-content .title {
+        max-width: 100%;
+    }
 
-  }
+    .card {
+        display: block;
+    }
+
+    .card .anni {
+        width: 100%;
+        margin: 16px 0;
+    }
+
+    .card .job {
+        margin: 0px;
+    }
+
+    .progress{
+        display: block;
+    }
+    .progress .name{
+        width: 100%;
+        margin: 16px 0;
+    }
+    .progress .progress-bar{margin: 0px;    }
+
+}

@@ -74,7 +74,4 @@ for (let i = 1; i <= 1010; i++) {
     .catch(e => {
       console.log(e);
     })
-
-
-
 }
