@@ -4,7 +4,12 @@
 
 body{
     background-color: #020202;
+    background-image: linear-gradient(rgb(0, 155, 0), rgb(0, 0, 0));
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
+
 
 .first-card-row{
     margin-top: 10%;
@@ -15,6 +20,15 @@ body{
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+.card {
+    background-color: transparent;
+    border: solid;
+    border-color: #119400;
+    max-height: 22rem;
+}
+
+
 
 .img-container{
 display: flex;
@@ -27,17 +41,26 @@ justify-content: center;
     max-height: 10rem;
 
 }
+.card-body p , h3{
+    text-shadow: 0 0 3px #119400, 0 0 5px #119400;
+    font-weight: bold;
+    color: #ffffff;
+}
 
 .card-title{
     text-align: center;
+    font-size: 1rem;
+    max-height: 1.3rem;
 }
 
-.card text{
+.card-text{
     text-align: center;
+    font-size: 0.65rem;
 }
+
 
 .divScroll {              /* div container of the scrolbar inside the card*/
-    margin-top: 0.5rem;
+    margin-top: 0.7rem;
     overflow:scroll;
     height:100px;
 }
@@ -68,5 +91,17 @@ justify-content: center;
     background: #555; 
   }
 
+  .prova2{
+    display:flex ;
+  }
 
-  
+.prova{
+
+    font-size: 0.8rem;
+}
+ 
+  @media screen and (max-width: 900px) {    /* create the margin when te card go to small and tablet screen */
+    .col-md-4{
+        margin: 5px 0px;
+    }
+}
