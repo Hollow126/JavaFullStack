@@ -1,27 +1,129 @@
-*{
+* {
     font-family: 'Press Start 2P', cursive;
 }
 
-body{
+body {
     background-color: #020202;
+    /* rules for the radient to use the entire of the body */
     background-image: linear-gradient(rgb(0, 155, 0), rgb(0, 0, 0));
     background-repeat: no-repeat;
     background-size: cover;
 }
 
+/*  .dropdown-container-of-link{       /*inside the nav there is a button that when clicked shows other link, each of the link is a display flex 
+    display:flex; 
+  }
+*/
+.dropdown-container-of-link a {
+    /* this put the text inside of a single link at the center of the Div  WORK  */
+    font-size: 0.8rem;
+}
+
+/* 
+.dropdown-container-single-link{        /* this put the text inside of a single link at the center of the Div  DONT WORK 
+    font-size: 0.4rem;
+} */
+
+/*this part doesn't work, but in the site it works only if the name of the link isnt too long, in case we can reduce the font of the text */
 
 
-.first-card-row{
+.principal-name {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.principal-name h1 {
+    font-size: 3.3rem;
+    text-shadow:
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 40px #0ff,
+        0 0 80px #0ff,
+        0 0 90px #0ff,
+        0 0 100px #0ff,
+        0 0 150px #0ff;
+}
+
+.subtitle {
+    margin-top: 2rem;
+    font-size: 10rem;
+    display: flex;
+    justify-content: center;
+    text-shadow:
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 40px #0ff,
+        0 0 80px #0ff,
+        0 0 90px #0ff,
+        0 0 100px #0ff,
+        0 0 150px #0ff;
+}
+
+.bio {
+    margin-top: 3rem;
+    font-size: 0.7rem;
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.bio:hover {
+    text-shadow:
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 40px #0ff,
+        0 0 80px #0ff,
+        0 0 90px #0ff,
+        0 0 100px #0ff,
+        0 0 150px #0ff;
+
+}
+
+.carousel-item img {
+    max-height: 40rem;
+    /* set the max height for every img*/
+    min-width: auto;
+}
+
+.carousel-title
+{
+    text-align: center;
+    font-size: 1rem;
+    max-height: 1.3rem;
+    text-shadow: 0 0 3px #119400, 0 0 5px #119400;
+    font-weight: bold;
+    color: #212529;
+}
+
+.carousel-text {
+    text-align: center;
+    font-size: 0.65rem;
+    text-shadow: 0 0 3px #119400, 0 0 5px #119400;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+
+
+.first-card-row {
+    /* the first row of the card has a larger margin, because we need it */
     margin-top: 10%;
     margin-bottom: 5px;
 }
 
-.card-row{
-    margin-top: 5px;
-    margin-bottom: 5px;
+.card-row {
+    /* the margin of the other row */
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .card {
+    /* the poroperty of every single Card in this case the border and the max height tha a card can reach*/
     background-color: transparent;
     border: solid;
     border-color: #119400;
@@ -30,78 +132,91 @@ body{
 
 
 
-.img-container{
-display: flex;
-justify-content: center;
+.img-container {
+    /* the container of every single image in every card*/
+    display: flex;
+    justify-content: center;
 }
 
 
-.card-img-top{
+.card-img-top {
     max-width: 10rem;
     max-height: 10rem;
 
 }
-.card-body p , h3{
+
+
+.card-body p {
     text-shadow: 0 0 3px #119400, 0 0 5px #119400;
     font-weight: bold;
     color: #ffffff;
 }
 
-.card-title{
+.card-body h3 {
+    text-shadow: 0 0 3px #119400, 0 0 5px #119400;
+    font-weight: bold;
+    color: #212529;
+}
+
+.card-title {
     text-align: center;
     font-size: 1rem;
     max-height: 1.3rem;
 }
 
-.card-text{
+.card-text {
     text-align: center;
     font-size: 0.65rem;
 }
 
-
-.divScroll {              /* div container of the scrolbar inside the card*/
-    margin-top: 0.7rem;
-    overflow:scroll;
-    height:100px;
-}
-
-.card:hover{                    /* animation of the card */
+.card:hover {
+    /* animation of the card */
     transform: scale(1.01);
-    border:solid;
+    border: solid;
     border-color: greenyellow;
 }
 
-::-webkit-scrollbar {    /* these four rules are for the customization of the scrollbar inside the card */
+.divScroll {
+    /* div container of the scrolbar inside the card*/
+    margin-top: 0.7rem;
+    overflow: scroll;
+    height: 100px;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+
+::-webkit-scrollbar {
+    /* these four rules are for the customization of the scrollbar inside the card */
     width: 0.5px;
     height: 0.5px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888; 
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-  }
-
-  .prova2{
-    display:flex ;
-  }
-
-.prova{
-
-    font-size: 0.8rem;
 }
- 
-  @media screen and (max-width: 900px) {    /* create the margin when te card go to small and tablet screen */
-    .col-md-4{
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+font {
+    font-family: 'Roboto', sans-serif;
+}
+
+@media screen and (max-width: 900px) {
+
+    /* create the margin when te card go to small and tablet screen */
+    .col-md-4 {
         margin: 5px 0px;
     }
 }
