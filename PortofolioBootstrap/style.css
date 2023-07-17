@@ -90,24 +90,35 @@ body {
     min-width: auto;
 }
 
-.carousel-title
-{
+.carousel-title {
     text-align: center;
     font-size: 1rem;
     max-height: 1.3rem;
     text-shadow: 0 0 3px #119400, 0 0 5px #119400;
     font-weight: bold;
     color: #212529;
+    margin-bottom: 18rem;
 }
 
 .carousel-text {
     text-align: center;
-    font-size: 0.65rem;
+    font-size: 1rem;
     text-shadow: 0 0 3px #119400, 0 0 5px #119400;
     font-weight: bold;
     color: #ffffff;
 }
 
+#carouselExampleCaptions {
+    background-color: transparent;
+    border: solid;
+    border-color: black;
+}
+
+#carouselExampleCaptions:hover {
+    transform: scale(1.03);
+    border: solid;
+    border-color: greenyellow;
+}
 
 
 .first-card-row {
@@ -213,10 +224,63 @@ font {
     font-family: 'Roboto', sans-serif;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 768px) {
 
     /* create the margin when te card go to small and tablet screen */
     .col-md-4 {
         margin: 5px 0px;
     }
 }
+
+@media screen and (min-width: 1000px) {
+    .carousel-title {
+        text-align: center;
+        font-size: 1rem;
+        max-height: 1.3rem;
+        text-shadow: 0 0 3px #119400, 0 0 5px #119400;
+        font-weight: bold;
+        color: #212529;
+        margin-bottom: 28rem;
+    }
+}
+
+@media screen and (max-width:768px) {
+    #carouselExampleCaptions {
+        display: none;
+    }
+}
+
+
+
+.progress {
+    --progress: 0%;
+    box-shadow: 0 0 10px #aaa;
+  }
+  
+  .progress .bar {
+    width: var(--progress);
+    height: 100%;
+    background: linear-gradient(gold, #c85, gold);
+    background-repeat: repeat;
+    box-shadow: 0 0 10px 0px orange;
+    animation: 
+      shine 4s ease-in infinite,
+      end 1s ease-out 1 7s;
+    transition: width 3s ease 1s;
+  }
+  
+  @property --progress {
+    syntax: "<length>";
+    initial-value: 0%;
+    inherits: true;
+  }
+  
+  @keyframes shine {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 50px; }
+  }
+  
+  @keyframes end {
+    0%, 100% { box-shadow: 0 0 10px 0spx orange; }
+    50% { box-shadow: 0 0 15px 5px orange; }
+  } 
