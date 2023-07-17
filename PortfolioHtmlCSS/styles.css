@@ -116,7 +116,7 @@ nav {
 }
 
 .card .anni {
-    width: 20%;
+    width: 50%;
 }
 
 .card .job {
@@ -124,7 +124,7 @@ nav {
     justify-content: end;
 }
 
-.progress{
+/* .progress{
     display: flex;
     margin-bottom: 60px;
     width: 100%;
@@ -155,19 +155,19 @@ nav {
     position: relative;
     overflow: hidden;
     transition: width 2s;
-}
+} */
 
-.name{
+.name {
     margin-left: 225px;
 }
 
-.progress-bar:hover{
+.progress-bar:hover {
     transform: scale(1.03);
     box-shadow: rgba(149, 157, 165, 0.2)5px 5px 5px;
-    
+
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1020px) {
 
 
     .main-content .title {
@@ -187,13 +187,68 @@ nav {
         margin: 0px;
     }
 
-    .progress{
+    .progress {
         display: block;
     }
-    .progress .name{
+
+    .progress .name {
         width: 100%;
         margin: 16px 0;
     }
-    .progress .progress-bar{margin: 0px;    }
 
+    .progress .progress-bar {
+        margin: 0px;
+    }
+
+}
+
+.text-progress{
+    font-size: 2rem;
+}
+
+.progress {
+    --progress: 0%;
+    height: 2rem;
+    margin: 0.7rem 0;
+    box-shadow: 0 0 10px #aaa;
+}
+
+.progress .bar {
+    width: var(--progress);
+    height: 100%;
+    background: linear-gradient(gold, #c85, gold);
+    background-repeat: repeat;
+    box-shadow: 0 0 10px 0px orange;
+    animation:
+        shine 4s ease-in infinite,
+        end 1s ease-out 1 7s;
+    transition: width 3s ease 1s;
+}
+
+@property --progress {
+    syntax: "<length>";
+    initial-value: 0%;
+    inherits: true;
+}
+
+@keyframes shine {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 50px;
+    }
+}
+
+@keyframes end {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px 0spx orange;
+    }
+
+    50% {
+        box-shadow: 0 0 15px 5px orange;
+    }
 }
