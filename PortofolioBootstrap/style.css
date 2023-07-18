@@ -36,15 +36,16 @@ body {
 
 .principal-name h1 {
     font-size: 3.3rem;
+    color: white;
     text-shadow:
-        0 0 5px #fff,
+        0 0 5px #fff,         /*  updated the shadow beceause there were too shiny  */
+        /* 0 0 10px #fff, 
         0 0 10px #fff,
-        0 0 20px #fff,
-        0 0 40px #0ff,
-        0 0 80px #0ff,
+        0 0 20px #0ff,
+        0 0 30px #0ff, */
         0 0 90px #0ff,
         0 0 100px #0ff,
-        0 0 150px #0ff;
+        0 0 150px #0ff; 
 }
 
 .subtitle {
@@ -52,12 +53,13 @@ body {
     font-size: 10rem;
     display: flex;
     justify-content: center;
+    color: white;
     text-shadow:
-        0 0 5px #fff,
-        0 0 10px #fff,
+         0 0 5px #fff,
+        /* 0 0 10px #fff, 
         0 0 20px #fff,
         0 0 40px #0ff,
-        0 0 80px #0ff,
+        0 0 80px #0ff, */
         0 0 90px #0ff,
         0 0 100px #0ff,
         0 0 150px #0ff;
@@ -87,10 +89,20 @@ body {
 }
 
 .titolo-di-sezione{
+    color: white;
     display: flex;
     justify-content: center;
     margin: 3rem 0;
     text-shadow: 0 0 3px #119400, 0 0 5px #119400;
+    text-shadow:
+    0 0 5px #fff,
+   /* 0 0 10px #fff, 
+   0 0 20px #fff,
+   0 0 40px #0ff,
+   0 0 80px #0ff, */
+   0 0 90px #0ff,
+   0 0 100px #0ff,
+   0 0 150px #0ff;
 }
 
 .carousel-item img {
@@ -164,6 +176,8 @@ body {
     /* put the min and max height because the svg for php was different than the others so i obbligate the site to put the height of all the card at the height of 10rem */
     min-height: 10rem;          
     max-height: 10rem;
+    margin: 0.4rem 0;  
+    /* put the margin fo the margin between the card and the car image herself  */
 }
 
 
@@ -176,7 +190,16 @@ body {
 .card-body h3 {
     text-shadow: 0 0 3px #119400, 0 0 5px #119400;
     font-weight: bold;
-    color: #212529;
+    text-shadow:
+    0 0 5px #fff,
+   /* 0 0 10px #fff, 
+   0 0 20px #fff,
+   0 0 40px #0ff,
+   0 0 80px #0ff, */
+   0 0 90px #0ff,
+   0 0 100px #0ff,
+   0 0 150px #0ff;
+    color: white;
 }
 
 .card-title {
