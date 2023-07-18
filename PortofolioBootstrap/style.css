@@ -70,6 +70,7 @@ body {
     display: flex;
     justify-content: center;
     text-align: center;
+    text-shadow: 0 0 3px #035305, 0 0 5px #035305;
 }
 
 .bio:hover {
@@ -85,10 +86,11 @@ body {
 
 }
 
-.job-experience-title {
+.titolo-di-sezione{
     display: flex;
     justify-content: center;
     margin: 3rem 0;
+    text-shadow: 0 0 3px #119400, 0 0 5px #119400;
 }
 
 .carousel-item img {
@@ -109,7 +111,7 @@ body {
 
 .carousel-text {
     text-align: center;
-    font-size: 1rem;
+    font-size: 0.7rem;
     text-shadow: 0 0 3px #119400, 0 0 5px #119400;
     font-weight: bold;
     color: #ffffff;
@@ -128,11 +130,11 @@ body {
 }
 
 
-.first-card-row {
+/* .first-card-row {
     /* the first row of the card has a larger margin, because we need it */
-    margin-top: 10%;
+    /* margin-top: 8px;
     margin-bottom: 5px;
-}
+}  removed cause i put the margin on the title of the section */ 
 
 .card-row {
     /* the margin of the other row */
@@ -159,6 +161,8 @@ body {
 
 .card-img-top {
     max-width: 10rem;
+    /* put the min and max height because the svg for php was different than the others so i obbligate the site to put the height of all the card at the height of 10rem */
+    min-height: 10rem;          
     max-height: 10rem;
 }
 
@@ -243,7 +247,7 @@ font {
         font-size: 2rem;
     }
 
-    .job-experience-title h3 {
+    .titolo-di-sezione h3 {
         font-size: 1.4rem;
     }
 }
