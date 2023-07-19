@@ -5,9 +5,14 @@
 body {
     background-color: #020202;
     /* rules for the radient to use the entire of the body */
-    background-image: linear-gradient(rgb(0, 155, 0), rgb(0, 0, 0));
+    background-image: linear-gradient(rgb(14, 104, 14), rgb(0, 0, 0));
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+/* set the font size of the link in the navbar */
+.nav-item a{
+    font-size: 0.8rem;
 }
 
 /*  .dropdown-container-of-link{       /*inside the nav there is a button that when clicked shows other link, each of the link is a display flex
@@ -25,6 +30,10 @@ body {
 } */
 
 /*this part doesn't work, but in the site it works only if the name of the link isnt too long, in case we can reduce the font of the text */
+
+
+
+
 
 .principal-name {
     display: flex;
