@@ -1,5 +1,3 @@
-package es26.zoo.astratte;
-  
 public abstract class Animale {
     private String ordineAnimale; // mammifero, rettile, pesce ecc
     private String specieAnimale;   // cane, gatto, cane ecc ecc
