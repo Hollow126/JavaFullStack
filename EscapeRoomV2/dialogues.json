@@ -1,0 +1,20 @@
+{
+    "dialogues": [
+      {
+        "ID": "1",
+        "text": "hai raccolto il grimaldello"
+      },
+      {
+        "ID": "2",
+        "text": "Sto bene, grazie! Tu?"
+      },
+      {
+        "ID": "3",
+        "text": "Anch'io sto bene, cosa stai facendo?"
+      },
+      {
+        "ID": "4",
+        "text": "Sto cercando un tesoro nascosto nella foresta."
+      }
+    ]
+  }

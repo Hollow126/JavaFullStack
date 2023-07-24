@@ -1,0 +1,21 @@
+{
+    "dialogues": [
+      {
+        "character": "PersonaggioA",
+        "text": "Ciao, come stai?"
+      },
+      {
+        "character": "PersonaggioB",
+        "text": "Sto bene, grazie! Tu?"
+      },
+      {
+        "character": "PersonaggioA",
+        "text": "Anch'io sto bene, cosa stai facendo?"
+      },
+      {
+        "character": "PersonaggioB",
+        "text": "Sto cercando un tesoro nascosto nella foresta."
+      }
+    ]
+  }
+  
