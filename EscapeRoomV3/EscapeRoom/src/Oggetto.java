@@ -1,15 +1,20 @@
-public abstract class Oggetto {
-
-    public String nomeOggetto;
-
+public class Oggetto {
+    private String nomeOggetto;
     public Oggetto(String nomeOggetto) {
-        this.nomeOggetto = nomeOggetto;
+       this.nomeOggetto = nomeOggetto;
     }
-    public abstract String oggettoRaccolto();
 
-    public abstract void oggettoUsatoCorrettamente();
+    public void oggettoUsatoCorrettamente() {
+        System.out.println("il " + nomeOggetto + " si è rotto ed è stato usato correttamente");
+    }
 
-    public abstract void oggettoUsatoErroneamente();
+    public void oggettoUsatoErroneamente() {
+        System.out.println("il " + nomeOggetto + " si è rotto ed è stato usato erroneamente");
+    }
 
-    
+    public void oggettoRaccolto()
+    {
+        System.out.println("il " + nomeOggetto + " è stato raccolto");
+    }
+
 }

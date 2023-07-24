@@ -1,21 +1,54 @@
 {
+    "plot_texts": [
+      {
+        "id": 1,
+        "text": {
+          "it": "ti risvegli in una stanza buia illuminata solo dalla luce di una fiaccola mezza spenta \n la stanza nonostante sia in delle condizioni pessime, con del sangue ovunque ha comunque sia un qualcosa di moderno, vedi delle luci in cima",
+          "en": "you wake up.... "
+        }
+      },
+      {
+        "id": 2,
+        "text": {
+          "it": "Il protagonista si ritrovò di fronte a una scelta difficile...",
+          "en": "The protagonist faced a tough choice..."
+        }
+      }
+    ],
     "dialogues": [
       {
+        "id": 1,
         "character": "PersonaggioA",
-        "text": "Ciao, come stai?"
+        "text": {
+          "it": "Ciao, come stai?",
+          "en": "Hello, how are you?"
+        }
       },
       {
+        "id": 2,
         "character": "PersonaggioB",
-        "text": "Sto bene, grazie! Tu?"
+        "text": {
+          "it": "Sto bene, grazie! Tu?",
+          "en": "I'm fine, thank you! And you?"
+        }
+      }
+    ],
+    "environmental_dialogues": [
+      {
+        "id": 1,
+        "character": "Ambientazione",
+        "text": {
+          "it": "raccogli il grimaldello da terra",
+          "en": "you take the Toothpicker from the ground"
+        }
       },
       {
-        "character": "PersonaggioA",
-        "text": "Anch'io sto bene, cosa stai facendo?"
-      },
-      {
-        "character": "PersonaggioB",
-        "text": "Sto cercando un tesoro nascosto nella foresta."
+        "id": 2,
+        "character": "Ambientazione",
+        "text": {
+          "it": "Si sente il canto degli uccelli.",
+          "en": "The sound of birds singing can be heard."
+        }
       }
     ]
   }
-  
