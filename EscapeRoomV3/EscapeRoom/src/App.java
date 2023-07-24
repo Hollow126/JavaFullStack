@@ -13,24 +13,19 @@ public class App {
         boolean uscitoDallaStanza = false;
         boolean morto = false;
         boolean nightmareMode = false;
-        Scanner tastiera = new Scanner(System.in);
 
         String lingua = selezioneLingua();
         int velocitaTesto = selezionaVelocitaTesto();
 
-        // Carica il contenuto del file JSON
-        JSONParser parser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(
-                "C:/Users/Java/Documents/java-Local/java-FullStack-Assignement/EscapeRoomV3/EscapeRoom/src/dialogues.json"));
         // "./dialogues.json"));
 
         Inventario inventario = new Inventario();
         Map<Integer, String> ListaSceltePreda1 = new HashMap<Integer, String>();
 
-        ListaSceltePreda1.put(1, "vedi un grimaldello affianco a te");
-        ListaSceltePreda1.put(2, "una mattonella rotta");
-        ListaSceltePreda1.put(3, "un letto ");
-        ListaSceltePreda1.put(4, "un muro ombroso ");
+        ListaSceltePreda1.put(1, selezionaTestoDaJSON("choiches.json", "choiches", lingua, 1));
+        ListaSceltePreda1.put(2, selezionaTestoDaJSON("choiches.json", "choiches", lingua, 2));
+        ListaSceltePreda1.put(3, selezionaTestoDaJSON("choiches.json", "choiches", lingua, 3));
+        ListaSceltePreda1.put(4, selezionaTestoDaJSON("choiches.json", "choiches", lingua, 4));
         ListaSceltePreda1.put(5, "una fiaccola sul muro ");
         ListaSceltePreda1.put(6, "porta ");
         ListaSceltePreda1.put(7, "bottone ");
@@ -40,15 +35,19 @@ public class App {
         ListaSceltePreda1.put(11, "fessura a forma di cuore");
         ListaSceltePreda1.put(20, "inventario ");
         ListaSceltePreda1.put(30, "fondi oggetti ");
+        Scanner tastiera = new Scanner(System.in);
         while (uscitoDallaStanza == false && nightmareMode == false && morto == false) {
-            printAnimated(selezionaTestoDaJSON(jsonObject, "plot_text", lingua, 1), velocitaTesto);
+            printAnimated(selezionaTestoDaJSON("plot_texts.json", "plot_texts", lingua, 1), velocitaTesto);
             showScelte(ListaSceltePreda1);
             String inputUtente = tastiera.nextLine();
             switch (inputUtente) {
                 case "1": // grimaldello
                     if (ListaSceltePreda1.containsKey(1)) {
                         Oggetto grimaldello = new Oggetto("grimaldello");
-                        printAnimated(selezionaTestoDaJSON(jsonObject,"environmental_dialogues",lingua, 3), velocitaTesto);
+                        printAnimated(
+                                selezionaTestoDaJSON("environmental_dialogues.json", "environmental_dialogues", lingua,
+                                        1),
+                                velocitaTesto);
                         inventario.aggiungiOggetto(grimaldello);
                         ListaSceltePreda1.remove(1);
                         break;
@@ -62,12 +61,18 @@ public class App {
         tastiera.close();
     }
 
-    // Metodo al quale si passa un oggetto Json, una categoria nella quale cercare
+    // Metodo al quale si passa una categoria nella quale cercare
     // l'oggetto, una lingua dal quale scegliere ed infine un ID
     // ritorna il testo dalla categoria che si vuole, nella lingua selezionata
-    public static String selezionaTestoDaJSON(JSONObject oggettoJson, String categoriaSelezionata,
-            String linguaSelezionata, int idSelezionato) {
-        JSONArray selectedCategoryArray = (JSONArray) oggettoJson.get(categoriaSelezionata);
+    public static String selezionaTestoDaJSON(String nomeFile, String categoriaSelezionata,
+            String linguaSelezionata, int idSelezionato) throws Exception {
+
+        // Carica il contenuto del file JSON
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(
+                "C:/Users/Java/Documents/java-Local/java-FullStack-Assignement/EscapeRoomV3/EscapeRoom/src/"
+                        + nomeFile));
+        JSONArray selectedCategoryArray = (JSONArray) jsonObject.get(categoriaSelezionata);
         for (Object textObj : selectedCategoryArray) {
             JSONObject text = (JSONObject) textObj;
             int id = ((Long) text.get("id")).intValue();
@@ -102,25 +107,23 @@ public class App {
     // Metodo Selezione Lingua
     public static String selezioneLingua() {
         Scanner tastiera = new Scanner(System.in);
-
+        System.out.println("select your language 1 = italiano, 2 = english");
         try {
-            String lingua = tastiera.nextLine();
-            if (lingua == "it") {
+
+            System.out.println(" ");
+            int numeroLingua = Integer.parseInt(tastiera.nextLine());
+            if (numeroLingua == 1) {
                 System.out.print("hai selezionato Italiano");
-                tastiera.close();
                 return "it";
-            } else if (lingua == "en") {
+            } else if (numeroLingua == 2) {
                 System.out.print("you selected english");
-                tastiera.close();
                 return "en";
             } else {
                 System.out.print("hai selezionato predefinito italiano");
-                tastiera.close();
                 return "it";
             }
         } catch (NumberFormatException e) {
             System.out.print("hai selezionato predefinito italiano");
-            tastiera.close();
             return "it";
             // se
             // l'utente
@@ -141,32 +144,27 @@ public class App {
         Scanner tastiera = new Scanner(System.in);
         System.out.println("inserisci la velocita del testo (1 = lenta,2 = media, 3 = veloce, 4 molto veloce)");
         try {
-
             int velocitaTestoInput = Integer.parseInt(tastiera.nextLine());
             if (velocitaTestoInput == 1) {
                 velocitaTestoInput = 100;
-                tastiera.close();
                 printAnimated("hai scelto testo lento", velocitaTestoInput);
                 return velocitaTestoInput;
             } else if (velocitaTestoInput == 2) {
                 velocitaTestoInput = 50;
                 printAnimated("hai scelto testo normale", velocitaTestoInput);
-                tastiera.close();
                 return velocitaTestoInput;
             } else if (velocitaTestoInput == 3) {
                 velocitaTestoInput = 20;
                 printAnimated("hai scelto testo veloce", velocitaTestoInput);
-                tastiera.close();
                 return velocitaTestoInput;
             } else {
                 velocitaTestoInput = 5;
                 printAnimated("hai scelto testo molto veloce", velocitaTestoInput);
-                tastiera.close();
                 return velocitaTestoInput;
             }
         } catch (Exception e) {
-            printAnimated("hai scelto testo molto veloce", 5);
-            tastiera.close();
+            System.out.println(e);
+            printAnimated("input non valido selezionato testo molto veloce ", 5);
             return 5;
             // se
             // l'utente
