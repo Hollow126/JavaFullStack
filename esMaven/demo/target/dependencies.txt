@@ -1,0 +1,5 @@
+digraph "com.example:demo:jar:1" { 
+	"com.example:demo:jar:1" -> "junit:junit:jar:4.11:test" ; 
+	"com.example:demo:jar:1" -> "org.xerial:sqlite-jdbc:jar:3.42.0.0:compile" ; 
+	"junit:junit:jar:4.11:test" -> "org.hamcrest:hamcrest-core:jar:1.3:test" ; 
+ } 

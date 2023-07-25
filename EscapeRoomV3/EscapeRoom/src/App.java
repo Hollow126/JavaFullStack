@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+// PER SISTEMARE IL PROBLEMA CON GLI IMPORT AGGIUNGERE IN BAASSO A SINISTRA IN REFERENCED LIBRARY IL FILE DEI DOWNLOAD 
 public class App {
     public static void main(String[] args) throws Exception {
         boolean uscitoDallaStanza = false;
@@ -64,30 +65,30 @@ public class App {
     // Metodo al quale si passa una categoria nella quale cercare
     // l'oggetto, una lingua dal quale scegliere ed infine un ID
     // ritorna il testo dalla categoria che si vuole, nella lingua selezionata
-    public static String selezionaTestoDaJSON(String nomeFile, String categoriaSelezionata,
-            String linguaSelezionata, int idSelezionato) throws Exception {
 
+    public static String selezionaTestoDaJSON(String fileName, String selectedCategory, String selectedLanguage,
+            int selectedId) throws Exception {
         // Carica il contenuto del file JSON
         JSONParser parser = new JSONParser();
         JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(
                 "C:/Users/Java/Documents/java-Local/java-FullStack-Assignement/EscapeRoomV3/EscapeRoom/src/"
-                        + nomeFile));
-        JSONArray selectedCategoryArray = (JSONArray) jsonObject.get(categoriaSelezionata);
+                        + fileName));
+        JSONArray selectedCategoryArray = (JSONArray) jsonObject.get(selectedCategory);
+
         for (Object textObj : selectedCategoryArray) {
             JSONObject text = (JSONObject) textObj;
             int id = ((Long) text.get("id")).intValue();
             JSONObject translations = (JSONObject) text.get("text");
-            String textContent = (String) translations.get(linguaSelezionata);
+            String textContent = (String) translations.get(selectedLanguage);
 
-            if (id == idSelezionato) {
-                // System.out.println(character + ": " + text);
+            if (id == selectedId) {
                 return textContent;
-            } else {
-                return " dialogo non trovato";
             }
         }
-        return null;
 
+        // Se non viene trovato alcun testo con l'ID selezionato, restituisce una
+        // stringa vuota.
+        return "dialogo non trovato";
     }
 
     // Metodo VisualizzazioneScelte, questo metodo fa in modo che nel terminale le
