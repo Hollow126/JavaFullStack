@@ -3,9 +3,10 @@ package com.example;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+// TODO mettere il collegamento non su id ma su idLista e mettere un campo Id magia e idpersonaggio a cui appartiene magia 
 import org.sqlite.SQLiteException;
 
 public class Database {
@@ -32,39 +33,40 @@ public class Database {
                 "atkBase INT," +
                 "defBase INT," +
                 "velocita INT," +
-                "idMagia INT," +
-                "FOREIGN KEY (idMagia) REFERENCES magie(idMagia)" +
+                "idMagia INT" +
+ //               "FOREIGN KEY (idMagia) REFERENCES magie(idMagia)" +
                 ")";
 
         // Creazione della tabella magie con chiave primaria (idMagia)
         String sqlMagie = "CREATE TABLE IF NOT EXISTS magie (" +
-                "idMagia INT PRIMARY KEY," +
+                "idMagia INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "idPersonaggioMagia,"+
                 "nomeMagia VARCHAR(100)," +
                 "descrizione VARCHAR(255)," +
                 "puntiPotenza INT" +
                 ")";
 
-        //Aggiunta della chiave esterna (idMagia) nella tabella personaggi
+        // Aggiunta della chiave esterna (idMagia) nella tabella personaggi
         // String sqlForeignKey = "ALTER TABLE personaggi " +
-        // //         // "ADD COLUMN idMagia INT, " +
-        //          "ADD FOREIGN KEY (idMagia) REFERENCES magie(idMagia)";
+        // // // "ADD COLUMN idMagia INT, " +
+        // "ADD FOREIGN KEY (idMagia) REFERENCES magie(idMagia)";
 
         try (Statement statement = connection.createStatement()) {
             statement.execute(sqlPersonaggi);
             statement.execute(sqlMagie);
-         //   statement.execute(sqlForeignKey);
+            // statement.execute(sqlForeignKey);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    // Metodo per salvare un oggetto Personaggio nel database; con le prepared
+    // Metodo per creare un oggetto Personaggio nel database; con le prepared
     // statement, 1 corrisponde al primo punto di domanda, il 2 al secondo ecc ecc
     // con preparedStatement.setQualcosa si possono inserire i valori che noi
     // vogliamo passare come valori alla query, come primo argomento il nuemro del
     // punto di domand a
     // come secondo il valore vero e proprio che si passera alla query
-    public void salvaPersonaggio(EntitaGiocante personaggio) {
+    public void creaPersonaggioInDB(EntitaGiocante personaggio) {
         String sql = "INSERT INTO personaggi (id, nome, lV, esperienza, isAllley, vita, atkBase, defBase, velocita) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -94,7 +96,7 @@ public class Database {
     }
 
     // Metodo per modificare un personaggio nel database
-    public void modificaPersonaggio(EntitaGiocante nuovoPersonaggio) {
+    public void modificaPersonaggioInDB(EntitaGiocante nuovoPersonaggio) {
         String sql = "UPDATE personaggi SET " +
                 "nome = ?, lV = ?, esperienza = ?, isAllley = ?, " +
                 "vita = ?, atkBase = ?, defBase = ?, velocita = ? " +
@@ -121,4 +123,65 @@ public class Database {
         }
     }
 
+    public void creaMagiaPerPersonaggioSeNonEsisteDB(EntitaGiocante personaggio, Magia magia) {
+        if (verificaSeMagiaEsisteInDB(personaggio.getId(), magia.getNome())) {
+            System.out.println("LA MAGIA ESISTE");
+        } else {
+            System.out.println("la magia non esiste");
+            creaMagiaPerPersonaggioDB(personaggio.getId(), magia);
+        }
+
+    }
+
+    // con questo metodo utilizzo la count per avere come risultato le righe che
+    // soddisfano le condizioni della query
+    // la query in se fa un confronto tra le tabelle personaggi e la tabella magia,
+    // utilizzando come collegamento
+    // per la tabella magie il campo idMagia, per la tabella personaggi il campo id,
+    // prendendo i casi nel quale i valori
+    // dei campi magie.nomeMagia e personaggi.id sono uguali al nome della magia e
+    // all'id del personaggio
+    // ritorna True se la magia esiste in Database, False se la magia non esiste
+    public boolean verificaSeMagiaEsisteInDB(int idPersonaggio, String nomeMagia) {
+        String sql = "SELECT COUNT(*) AS countMagie " +
+                "FROM magie " +
+                "JOIN personaggi ON magie.idPersonaggioMagia = personaggi.id " +
+                "WHERE magie.nomeMagia = ? AND magie.idPersonaggioMagia = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, nomeMagia);
+            preparedStatement.setInt(2, idPersonaggio);
+
+            ResultSet resultSet = preparedStatement.executeQuery(); // con l'oggetto ResultSet otteniamo le righe che
+                                                                    // soddisfano la query che gli assegniamo
+
+            // con il metodo .next prendiamo la riga successiva
+            if (resultSet.next()) {
+                int countMagie = resultSet.getInt("countMagie"); // assegniamo alla variabile countMagie il numero di
+                                                                 // righe che soddisfano le query
+                return countMagie > 0; // con questa istruzione il metodo ritorna true se countMagie e maggiore di 0 e
+                                       // quindi su Database esiste gia un collegamento
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false; // Ritorna false in caso di eccezione o se il nomeMagia non esiste nel databased
+    }
+
+    public void creaMagiaPerPersonaggioDB(int idPersonaggio, Magia magia) {
+        String sql = "INSERT INTO magie (idPersonaggioMagia, nomeMagia, descrizione, puntiPotenza) " +
+                "VALUES (?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, idPersonaggio);
+            preparedStatement.setString(2, magia.getNome());
+            preparedStatement.setString(3, magia.getDescrizione());
+            preparedStatement.setInt(4, magia.getPp());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

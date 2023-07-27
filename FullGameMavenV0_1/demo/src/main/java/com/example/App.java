@@ -21,7 +21,15 @@ public class App {
         Scanner tastiera = new Scanner(System.in);
 
         // Creo una connessione al database
-        String url = "jdbc:sqlite:database.db";
+        String nomeDatabase;
+        System.out.println("come vuoi chiamare db ");
+        try {
+            nomeDatabase = tastiera.nextLine();
+        } catch (Exception e) {
+            nomeDatabase = " defaultDb ";
+        }
+
+        String url = "jdbc:sqlite:"+ nomeDatabase + ".db";
 
         System.out.println("Connessione a SQLite stabilita.");
 
@@ -30,8 +38,21 @@ public class App {
         Inventario inventario = new Inventario();
         Oggetto grimaldello1 = new Oggetto("grimaldello");
 
+        Guerriero personaggio1 = new Guerriero(1, "Personaggio1", 5, 100, false, 100.0, 20, 10, 50);
+        Guerriero personaggio2 = new Guerriero(2, "Personaggio2", 8, 200, true, 150.0, 30, 15, 70);
+
+        Magia pallaDiFuoco = new Magia("palla di fuoco ", "prova", 5);
+        Magia pallaDiGhiaccio = new Magia("palla di ghiaccio ", "prova", 30);
+        personaggio1.listaMagie.add(pallaDiFuoco);
+        personaggio2.listaMagie.add(pallaDiFuoco);
+        database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio1, pallaDiFuoco);
+        database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio2, pallaDiFuoco);
+        database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio1, pallaDiFuoco);
+        database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio1, pallaDiGhiaccio);
+        database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio2, pallaDiGhiaccio);
+        database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio2, pallaDiGhiaccio);
+
         List<EntitaGiocante> listaEntitaGiocanti = new ArrayList<>();
-        listaEntitaGiocanti.add(new Guerriero(1, "Personaggio1", 5, 100, false, 100.0, 20, 10, 50));
         listaEntitaGiocanti.add(new Guerriero(2, "Personaggio2", 8, 200, true, 150.0, 30, 15, 70));
         listaEntitaGiocanti.add(new Guerriero(3, "Personaggio3", 10, 300, false, 200.0, 25, 12, 60));
         listaEntitaGiocanti.add(new Guerriero(4, "Personaggio4", 3, 50, true, 80.0, 15, 8, 40));
@@ -53,21 +74,21 @@ public class App {
         listaEntitaGiocanti.add(new Guerriero(20, "Personaggio20", 19, 1100, true, 380.0, 48, 30, 98));
 
         for (EntitaGiocante personaggio : listaEntitaGiocanti) {
-            database.salvaPersonaggio(personaggio);
-            
+            database.creaPersonaggioInDB(personaggio);
+
         }
+
         Combattimento evento1 = new Combattimento();
         evento1.inizioCombattimento(listaEntitaGiocanti);
 
         // System.out.println("inserisci il nuovo nome del personaggio");
         // personaggio3.setNome(tastiera.nextLine());
         // database.modificaPersonaggio(personaggio3);
-        Magia pallaDiFuoco = new Magia("palla di fuoco ", "prova", 5);
+
         // personaggio1.aggiungiMagia(pallaDiFuoco);
         // personaggio1.aggiungiOggetto(grimaldello1);
         String lingua = selezioneLingua();
         int velocitaTesto = selezionaVelocitaTesto();
-
 
         Map<Integer, String> ListaSceltePreda1 = new HashMap<Integer, String>();
 
