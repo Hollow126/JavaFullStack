@@ -34,27 +34,21 @@ public class Database {
                 "defBase INT," +
                 "velocita INT," +
                 "idMagia INT" +
- //               "FOREIGN KEY (idMagia) REFERENCES magie(idMagia)" +
+                // "FOREIGN KEY (idMagia) REFERENCES magie(idMagia)" +
                 ")";
 
         // Creazione della tabella magie con chiave primaria (idMagia)
         String sqlMagie = "CREATE TABLE IF NOT EXISTS magie (" +
                 "idMagia INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "idPersonaggioMagia,"+
+                "idPersonaggioMagia," +
                 "nomeMagia VARCHAR(100)," +
                 "descrizione VARCHAR(255)," +
                 "puntiPotenza INT" +
                 ")";
 
-        // Aggiunta della chiave esterna (idMagia) nella tabella personaggi
-        // String sqlForeignKey = "ALTER TABLE personaggi " +
-        // // // "ADD COLUMN idMagia INT, " +
-        // "ADD FOREIGN KEY (idMagia) REFERENCES magie(idMagia)";
-
         try (Statement statement = connection.createStatement()) {
             statement.execute(sqlPersonaggi);
             statement.execute(sqlMagie);
-            // statement.execute(sqlForeignKey);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -137,10 +131,11 @@ public class Database {
     // soddisfano le condizioni della query
     // la query in se fa un confronto tra le tabelle personaggi e la tabella magia,
     // utilizzando come collegamento
-    // per la tabella magie il campo idMagia, per la tabella personaggi il campo id,
+    // per la tabella magie il campo idPersonaggioMagia, per la tabella personaggi
+    // il campo id,
     // prendendo i casi nel quale i valori
     // dei campi magie.nomeMagia e personaggi.id sono uguali al nome della magia e
-    // all'id del personaggio
+    // all'id del personaggio passati come argomento,
     // ritorna True se la magia esiste in Database, False se la magia non esiste
     public boolean verificaSeMagiaEsisteInDB(int idPersonaggio, String nomeMagia) {
         String sql = "SELECT COUNT(*) AS countMagie " +

@@ -20,20 +20,17 @@ public class App {
         boolean nightmareMode = false;
         Scanner tastiera = new Scanner(System.in);
 
-        // Creo una connessione al database
-        String nomeDatabase;
-        System.out.println("come vuoi chiamare db ");
-        try {
-            nomeDatabase = tastiera.nextLine();
-        } catch (Exception e) {
-            nomeDatabase = " defaultDb ";
-        }
+        // esercizioDB();
 
-        String url = "jdbc:sqlite:"+ nomeDatabase + ".db";
+        // Creo una connessione al database
+        String nomeDatabase = " defaultDb ";
+
+        String url = "jdbc:sqlite:" + nomeDatabase + ".db";
 
         System.out.println("Connessione a SQLite stabilita.");
 
         Database database = new Database(url);
+
         database.createDatabase();
         Inventario inventario = new Inventario();
         Oggetto grimaldello1 = new Oggetto("grimaldello");
@@ -42,9 +39,14 @@ public class App {
         Guerriero personaggio2 = new Guerriero(2, "Personaggio2", 8, 200, true, 150.0, 30, 15, 70);
 
         Magia pallaDiFuoco = new Magia("palla di fuoco ", "prova", 5);
-        Magia pallaDiGhiaccio = new Magia("palla di ghiaccio ", "prova", 30);
+        Magia pallaDiGhiaccio = new Magia("palla di ghiaccio ", "prova",
+                30);
         personaggio1.listaMagie.add(pallaDiFuoco);
         personaggio2.listaMagie.add(pallaDiFuoco);
+        database.creaPersonaggioInDB(personaggio1);
+        database.creaPersonaggioInDB(personaggio2);
+        database.creaPersonaggioInDB(personaggio2);
+
         database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio1, pallaDiFuoco);
         database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio2, pallaDiFuoco);
         database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio1, pallaDiFuoco);
@@ -92,7 +94,9 @@ public class App {
 
         Map<Integer, String> ListaSceltePreda1 = new HashMap<Integer, String>();
 
-        ListaSceltePreda1.put(1, selezionaTestoDaJSON("choiches.json", "choiches", lingua, 1));
+        ListaSceltePreda1.put(1,
+
+                selezionaTestoDaJSON("choiches.json", "choiches", lingua, 1));
         ListaSceltePreda1.put(2, selezionaTestoDaJSON("choiches.json", "choiches", lingua, 2));
         ListaSceltePreda1.put(3, selezionaTestoDaJSON("choiches.json", "choiches", lingua, 3));
         ListaSceltePreda1.put(4, selezionaTestoDaJSON("choiches.json", "choiches", lingua, 4));
@@ -130,6 +134,65 @@ public class App {
         tastiera.close();
     }
 
+    private static void esercizioDB() {
+        Scanner tastiera = new Scanner(System.in);
+        String nomeDatabase;
+        System.out.println("come vuoi chiamare db ");
+        try {
+            nomeDatabase = tastiera.nextLine();
+        } catch (Exception e) {
+            nomeDatabase = " defaultDb ";
+        }
+
+        String urlEsercizio = "jdbc:sqlite:" + nomeDatabase + ".db";
+
+        System.out.println("Connessione a SQLite stabilita.");
+
+        Database database = new Database(urlEsercizio);
+        boolean continua = true;
+        System.out.println("1 x creare database, 2 x inserire un personaggio, 3 per creare Csv, 4 x Terminare");
+        while (continua) {
+            urlEsercizio = tastiera.nextLine();
+            switch (urlEsercizio) {
+                case "1":
+                    database.createDatabase();
+                    System.out.println("database creato");
+                    break;
+                case "2":
+                    try {
+                        System.out.println("digita ID");
+                        int idprova = Integer.parseInt(tastiera.nextLine());
+                        System.out.println("digita nome");
+                        String nome = tastiera.nextLine();
+                        System.out.println("digita livello");
+                        int livello = Integer.parseInt(tastiera.nextLine());
+                        System.out.println("digita esp");
+                        int esp = Integer.parseInt(tastiera.nextLine());
+                        boolean alleato = true;
+                        System.out.println("digita vita");
+                        int vita = Integer.parseInt(tastiera.nextLine());
+                        System.out.println("digita atk");
+                        int atk = Integer.parseInt(tastiera.nextLine());
+                        System.out.println("digita difesa");
+                        int difesa = Integer.parseInt(tastiera.nextLine());
+                        System.out.println("digita velocita");
+                        int velocita = Integer.parseInt(tastiera.nextLine());
+                        Guerriero pppp = new Guerriero(idprova, nome, livello, esp, alleato, vita, atk, difesa,
+                                velocita);
+                        database.creaPersonaggioInDB(pppp);
+                    } catch (Exception e) {
+                        System.out.println("valore non valido");
+                        break;
+                    }
+                    break;
+                case "4":
+                    continua = false;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
     // Metodo al quale si passa una categoria nella quale cercare
     // l'oggetto, una lingua dal quale scegliere ed infine un ID
     // ritorna il testo dalla categoria che si vuole, nella lingua selezionata
