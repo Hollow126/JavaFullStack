@@ -1,0 +1,20 @@
+{
+  "dialogues": [
+    {
+      "id": 1,
+      "character": "PersonaggioA",
+      "text": {
+        "it": "Ciao, come stai?",
+        "en": "Hello, how are you?"
+      }
+    },
+    {
+      "id": 2,
+      "character": "PersonaggioB",
+      "text": {
+        "it": "Sto bene, grazie! Tu?",
+        "en": "I'm fine, thank you! And you?"
+      }
+    }
+  ]
+}

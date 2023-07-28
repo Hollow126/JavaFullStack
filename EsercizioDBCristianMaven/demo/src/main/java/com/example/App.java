@@ -6,6 +6,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +22,8 @@ public class App {
         boolean morto = false;
         boolean nightmareMode = false;
         Scanner tastiera = new Scanner(System.in);
+
+        esercizioDB();
 
         // Creo una connessione al database
         String nomeDatabase = " defaultDb ";
@@ -77,7 +82,7 @@ public class App {
             database.creaPersonaggioInDB(personaggio);
 
         }
-        database.exportPersonaggiToCSV("personaggi.csv");
+
         Combattimento evento1 = new Combattimento();
         evento1.inizioCombattimento(listaEntitaGiocanti);
 
@@ -132,6 +137,116 @@ public class App {
         tastiera.close();
     }
 
+    private static void esercizioDB() {
+        Scanner tastiera = new Scanner(System.in);
+
+        boolean continua = true;
+
+        String scelta = "";
+        Database database;
+        String nomeDatabase;
+        System.out.println("come vuoi chiamare db ");
+        try {
+            nomeDatabase = tastiera.nextLine();
+        } catch (Exception e) {
+            nomeDatabase = " defaultDb ";
+        }
+
+        String urlEsercizio = "jdbc:sqlite:" + nomeDatabase + ".db";
+
+        System.out.println("Connessione a SQLite stabilita.");
+        database = new Database(urlEsercizio);
+        database.createDatabase();
+        System.out.println("database creato");
+        while (continua) {
+            System.out.println(
+                    "1 x creare un altro database, 2 x inserire un personaggio, 3 per creare Csv, 4 x cambiare Database , 5 per terminare ");
+            scelta = tastiera.nextLine();
+            switch (scelta) {
+                case "1":
+                    String nomeNuovoDatabase;
+                    System.out.println("come vuoi chiamare db ");
+                    try {
+                        nomeNuovoDatabase = tastiera.nextLine();
+                    } catch (Exception e) {
+                        nomeNuovoDatabase = " defaultDb ";
+                    }
+
+                    String urlNuovoDB = "jdbc:sqlite:" + nomeNuovoDatabase + ".db";
+
+                    System.out.println("Connessione a SQLite stabilita.");
+                    database = new Database(urlNuovoDB);
+                    database.createDatabase();
+                    System.out.println("database " + urlNuovoDB + " creato");
+                    break;
+                case "2":
+                    try {
+                        System.out.println("digita ID");
+                        int idprova = Integer.parseInt(tastiera.nextLine());
+                        System.out.println("digita nome");
+                        String nome = tastiera.nextLine();
+                        System.out.println("digita livello");
+                        int livello = Integer.parseInt(tastiera.nextLine());
+                        System.out.println("digita esp");
+                        int esp = Integer.parseInt(tastiera.nextLine());
+                        boolean alleato = true;
+                        System.out.println("digita vita");
+                        int vita = Integer.parseInt(tastiera.nextLine());
+                        System.out.println("digita atk");
+                        int atk = Integer.parseInt(tastiera.nextLine());
+                        System.out.println("digita difesa");
+                        int difesa = Integer.parseInt(tastiera.nextLine());
+                        System.out.println("digita velocita");
+                        int velocita = Integer.parseInt(tastiera.nextLine());
+                        Guerriero pppp = new Guerriero(idprova, nome, livello, esp, alleato, vita, atk, difesa,
+                                velocita);
+                        database.creaPersonaggioInDB(pppp);
+                    } catch (Exception e) {
+                        System.out.println("valore non valido");
+                        break;
+                    }
+                    break;
+                case "3":
+                    try {
+                        String sqlPersonaggi = "SELECT (*) FROM personaggi"; 
+                        try (Statement statement = connection.createStatement()) {
+            statement.execute(sqlPersonaggi);
+            statement.execute(sqlMagie);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+                        FileWriter csvWriter = new FileWriter("prodotti.csv");
+                        csvWriter.append("id");
+                        csvWriter.append(",");
+                        csvWriter.append("nome");
+                        csvWriter.append(",");
+                        csvWriter.append("livello");
+                        csvWriter.append(",");
+                        csvWriter.append("esp");
+                        csvWriter.append(",");
+                        csvWriter.append("vita");
+                        csvWriter.append(",");
+                        csvWriter.append("atk");
+                        csvWriter.append(",");
+                        csvWriter.append("difesa");
+                        csvWriter.append(",");
+                        csvWriter.append("velocita");
+                        csvWriter.append(",");
+                        while () {
+                            
+                        }
+                    } catch (Exception e) {
+                        System.out.println("problemi col csv");
+                    }
+                    break;
+                case "4":
+                    continua = false;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
     // Metodo al quale si passa una categoria nella quale cercare
     // l'oggetto, una lingua dal quale scegliere ed infine un ID
     // ritorna il testo dalla categoria che si vuole, nella lingua selezionata

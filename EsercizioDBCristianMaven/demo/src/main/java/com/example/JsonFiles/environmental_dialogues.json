@@ -1,0 +1,20 @@
+{
+  "environmental_dialogues": [
+    {
+      "id": 2,
+      "character": "Ambientazione",
+      "text": {
+        "it": "raccogli il grimaldello da terra",
+        "en": "you take the Toothpicker from the ground"
+      }
+    },
+    {
+      "id": 1,
+      "character": "Ambientazione",
+      "text": {
+        "it": "Si sente il canto degli uccelli.",
+        "en": "The sound of birds singing can be heard."
+      }
+    }
+  ]
+}

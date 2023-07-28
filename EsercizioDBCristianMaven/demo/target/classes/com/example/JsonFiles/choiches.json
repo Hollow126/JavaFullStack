@@ -1,0 +1,36 @@
+{
+  "choiches": [
+    {
+      "id": 1,
+      "character": "PersonaggioA",
+      "text": {
+        "it": "vedi un grimaldello affianco a te",
+        "en": "you see a toothpicker on the ground"
+      }
+    },
+    {
+      "id": 2,
+      "character": "PersonaggioB",
+      "text": {
+        "it": "vedi una mattonella rotta ",
+        "en": "you see a broken piece of wall"
+      }
+    },
+    {
+      "id": 3,
+      "character": "PersonaggioA",
+      "text": {
+        "it": "un letto ",
+        "en": "a bed "
+      }
+    },
+    {
+      "id": 4,
+      "character": "PersonaggioB",
+      "text": {
+        "it": "un muro ombroso  ",
+        "en": "a shadow wall"
+      }
+    }
+  ]
+}

@@ -1,7 +1,5 @@
 package com.example;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,7 +11,7 @@ import org.sqlite.SQLiteException;
 
 public class Database {
     private Connection connection;
-    // se ci fossero più database, passare sempre l'url della connessione 
+
     public Database(String dbUrl) {
 
         try {
@@ -34,18 +32,18 @@ public class Database {
                 "vita DOUBLE," +
                 "atkBase INT," +
                 "defBase INT," +
-                "velocita INT" +
-             //   "idMagia INT" +
+                "velocita INT," +
+                "idMagia INT" +
+                // "FOREIGN KEY (idMagia) REFERENCES magie(idMagia)" +
                 ")";
 
         // Creazione della tabella magie con chiave primaria (idMagia)
         String sqlMagie = "CREATE TABLE IF NOT EXISTS magie (" +
                 "idMagia INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "idPersonaggio INTEGER," +
+                "idPersonaggioMagia," +
                 "nomeMagia VARCHAR(100)," +
                 "descrizione VARCHAR(255)," +
-                "puntiPotenza INT," +
-                "FOREIGN KEY (idPersonaggio) REFERENCES personaggi(id)" + // Chiave esterna che fa riferimento all'id della tabella personaggi+
+                "puntiPotenza INT" +
                 ")";
 
         try (Statement statement = connection.createStatement()) {
@@ -122,7 +120,6 @@ public class Database {
     public void creaMagiaPerPersonaggioSeNonEsisteDB(EntitaGiocante personaggio, Magia magia) {
         if (verificaSeMagiaEsisteInDB(personaggio.getId(), magia.getNome())) {
             System.out.println("LA MAGIA ESISTE");
-            getNomeMagiaPerPersonaggio();
         } else {
             System.out.println("la magia non esiste");
             creaMagiaPerPersonaggioDB(personaggio.getId(), magia);
@@ -167,8 +164,6 @@ public class Database {
         return false; // Ritorna false in caso di eccezione o se il nomeMagia non esiste nel databased
     }
 
-    // semplice insert nella quale si va a riempire la tabella magia di un
-    // personaggio
     public void creaMagiaPerPersonaggioDB(int idPersonaggio, Magia magia) {
         String sql = "INSERT INTO magie (idPersonaggioMagia, nomeMagia, descrizione, puntiPotenza) " +
                 "VALUES (?, ?, ?, ?)";
@@ -181,75 +176,6 @@ public class Database {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void getNomeMagiaPerPersonaggio() {
-        String sql = "SELECT p.id, p.nome AS nomePersonaggio, m.nomeMagia " +
-                "FROM personaggi p " +
-                "LEFT JOIN magie m ON p.idMagia = m.idMagia";
-
-        try (Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(sql)) {
-
-            // Stampare i risultati
-            while (resultSet.next()) {
-                int idPersonaggio = resultSet.getInt("id");
-                String nomePersonaggio = resultSet.getString("nomePersonaggio");
-                String nomeMagia = resultSet.getString("nomeMagia");
-
-                System.out.println("Personaggio (ID: " + idPersonaggio + "): " + nomePersonaggio);
-                System.out.println("Nome Magia collegata: " + nomeMagia);
-                System.out.println();
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void exportPersonaggiToCSV(String filePath) {
-        String sql = "SELECT * FROM personaggi";
-
-        try (Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(sql);
-                FileWriter fileWriter = new FileWriter(filePath)) {
-
-            // Scrivi l'intestazione del file CSV
-            fileWriter.append("id,nome,lV,esperienza,isAllley,vita,atkBase,defBase,velocita,idMagia");
-            fileWriter.append("\n");
-
-            // Scrivi i dati dei personaggi nel file CSV
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String nome = resultSet.getString("nome");
-                int lV = resultSet.getInt("lV");
-                int esperienza = resultSet.getInt("esperienza");
-                boolean isAllley = resultSet.getBoolean("isAllley");
-                double vita = resultSet.getDouble("vita");
-                int atkBase = resultSet.getInt("atkBase");
-                int defBase = resultSet.getInt("defBase");
-                int velocita = resultSet.getInt("velocita");
-                int idMagia = resultSet.getInt("idMagia");
-
-                // Scrivi una riga nel file CSV per ogni personaggio
-                fileWriter.append(String.valueOf(id)).append(",");
-                fileWriter.append(nome).append(",");
-                fileWriter.append(String.valueOf(lV)).append(",");
-                fileWriter.append(String.valueOf(esperienza)).append(",");
-                fileWriter.append(String.valueOf(isAllley)).append(",");
-                fileWriter.append(String.valueOf(vita)).append(",");
-                fileWriter.append(String.valueOf(atkBase)).append(",");
-                fileWriter.append(String.valueOf(defBase)).append(",");
-                fileWriter.append(String.valueOf(velocita)).append(",");
-                fileWriter.append(String.valueOf(idMagia));
-                fileWriter.append("\n");
-            }
-
-            System.out.println("Dati dei personaggi esportati con successo in " + filePath);
-
-        } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
     }
