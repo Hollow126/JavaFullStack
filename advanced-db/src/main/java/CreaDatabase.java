@@ -3,7 +3,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Crealo {
+public class CreaDatabase {
     public static void main(String[] args) {
         if (args.length == 0) {
             System.out.println("Nome del database non fornito. Uso 'database_collegato' come nome di default.");
