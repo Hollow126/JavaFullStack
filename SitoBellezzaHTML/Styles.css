@@ -1,0 +1,117 @@
+body {
+    background-color: rgb(23, 211, 224);
+    color: white;
+}
+
+
+header {
+    display: flex;
+    font-size: 2rem;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 70%, rgba(0, 212, 255, 1) 100%);
+    border: 0.6rem solid grey;
+    justify-content: center;
+}
+
+
+nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 70%, rgba(0, 212, 255, 1) 100%);
+    border: 0.6rem solid grey;
+}
+
+li {
+    display: inline-block;
+    padding: 10px;
+    margin: 0px 10px;
+    border: 1px solid grey;
+    transition: all .2s ease-in-out;
+    
+}
+
+li:hover {
+    transform: scale(1.1);
+}
+
+li>a {
+    text-decoration: none;
+    font-size: 2rem;
+    color: white;
+}
+
+a:hover {
+    color: yellow;
+}
+
+main {
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 70%, rgba(0, 212, 255, 1) 100%);
+    border: 0.6rem solid grey;
+
+}
+
+main>h2 {
+    font-size: 3rem;
+}
+
+main>h2,
+p {
+    text-align: center;
+}
+
+
+
+footer {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 70%, rgba(0, 212, 255, 1) 100%);
+    border: 0.6rem solid grey;
+
+}
+
+.contenitore-lista-main {
+    display: flex;
+    justify-content: space-around;
+}
+
+.lista-main {
+    padding: 40px;
+    border: none;
+}
+
+@media only screen and (max-width: 800px) {
+    body {
+        background-color: lightblue;
+    }
+
+    header {
+        font-size: 1.5rem;
+    }
+
+    ul {
+        width: 80%;
+    }
+
+    li {
+        display: flex;
+        margin: 4px 0px;
+        border: 1px solid grey;
+        justify-content: center;
+        transition: all .2s ease-in-out;
+    }
+
+    li:hover {
+        transform: scale(1.1);
+    }
+
+    li>a {
+        font-size: 1.3rem;
+    }
+
+    main>h2 {
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,19 @@
+
+.logo {
+    width: 5rem;
+}
+.bordo-con-ombra
+{
+    border: 9px solid grey;
+    padding-left: 5rem;
+}
+.zoom:hover {
+    border-bottom: 2px solid white;
+    color: white;
+}
+
+@media only screen and (max-width: 900px) {
+    .scompari {
+        display: none;
+    }
+}

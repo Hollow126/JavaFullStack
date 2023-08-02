@@ -29,7 +29,7 @@ public class InserisciManual {
             int scelta = Integer.parseInt(input.nextLine());
 
             if (scelta == 0) {
-                // query x i dati utenti che poi inserira manualmente
+                // query per i dati utenti che poi inserira manualmente
                 String sqlInserisciDatiUtente = "INSERT INTO prodotti(nome, quantita, prezzo, id_categoria) VALUES(?, ?, ?, ?)";
                 PreparedStatement pstmtInserisciDatiUtente = conn.prepareStatement(sqlInserisciDatiUtente);
 
@@ -62,7 +62,7 @@ public class InserisciManual {
                 ResultSet rsCc = ptsmtControlloCategoria.executeQuery();
 
                 // se dal risultato della seconda query esce almeno una riga, allora aggiunge
-                // come 4 valore della prima query
+                // come 4 ? valore della prima query
                 // il valore dell'id che è risultato dalla prima query
                 if (rsCc.next() == true) {
                     int id_categoria = rsCc.getInt("id");
