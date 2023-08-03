@@ -1,19 +1,32 @@
+.backgroun-header{
+    background-color:#049208 ;
+}
+.background-navbar{
+
+background-color:   #005c0b;
+}
+
 
 .logo {
-    width: 5rem;
+    width: max-content;
+    height:min-content ;
+}
+.bottone-menu{
+    margin-left: 1rem;
 }
 .bordo-con-ombra
 {
     border: 9px solid grey;
-    padding-left: 5rem;
+    padding-left: 0.5rem;
 }
 .zoom:hover {
     border-bottom: 2px solid white;
     color: white;
+    
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1200px) {
     .scompari {
         display: none;
-    }
+    } 
 }
