@@ -1,0 +1,52 @@
+Maven è il node di java 
+
+il group id sarebbe il package con com.example, ti crea la sottocartella chiamata com example 
+artifact id è il nome principale della rotta nel nostro caso demo 
+per compilare bisogna entrare dentro la rotta principale e fare mvn compile 
+all'interno del POM vi sono tutte le dipendenze e plugin x i vari file 
+
+
+con mvn compile si fa la build del programma, molte volte aggiornare la proprietà del compiler del pom da 1.7 a 1.8
+la proprietà in questione è questa  
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
+
+con  mvn exec:java -D"exec.mainClass"="Main"  si esegue il programma.
+
+usare le virgolette dopo ogni -D "" perchè sennno non funziona 
+
+
+in seguito a delle problematiche con la compilazione, sono giunto a 2 possibili risoluzioni per il problema, o si installa questo plugin nel pom 
+
+<build>
+	<plugins>
+		<plugin>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>exec-maven-plugin</artifactId>
+			<version>3.1.0</version>
+			<configuration>
+				<mainClass>com.example.Main</mainClass>
+			</configuration>
+		</plugin>
+	</plugins>
+</build>
+
+che consente di farlo funzionare eseguire.
+
+In alternativa, invece di creare un simple artifact,Creare un progetto simple webApp come artifaccto, v1.4
+e yes ad entrambe le domande, e da li spostare i miei programmi java fuori da com.example ed all'interno di Java
+in questo modo il programma funziona senza l'utilizzo del plugin 
+
+
+SITI X HTML Css e Javascript
+
+https://www.awwwards.com/websites/bootstrap/
+https://colorlib.com/wp/bootstrap-websites/
+
+
+GreenSock Per le Animazioni

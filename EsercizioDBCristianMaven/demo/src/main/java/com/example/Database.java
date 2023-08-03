@@ -24,7 +24,7 @@ public class Database {
     public void createDatabase() {
         // Creazione della tabella personaggi con chiave primaria (id)
         String sqlPersonaggi = "CREATE TABLE IF NOT EXISTS personaggi (" +
-                "id INT PRIMARY KEY," +
+                "idPersonaggio INT PRIMARY KEY," +
                 "nome VARCHAR(100)," +
                 "lV INT," +
                 "esperienza INT," +
@@ -33,20 +33,26 @@ public class Database {
                 "atkBase INT," +
                 "defBase INT," +
                 "velocita INT," +
-                "FOREIGN KEY(id) REFERENCES magie(idMagia)" +
+                "FOREIGN KEY(idPersonaggio) REFERENCES magiePersonaggi(idPersonaggioMagia)" +
                 ")";
 
         // Creazione della tabella magie con chiave primaria (idMagia)
+        String sqlMagiePersonaggio = "CREATE TABLE IF NOT EXISTS magiePersonaggi (" +
+                "idMagia INTEGER PRIMARY KEY," +
+                "idPersonaggio INTEGER" +
+                ")";
+
         String sqlMagie = "CREATE TABLE IF NOT EXISTS magie (" +
-                "idMagia INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "idPersonaggioMagia," +
+                "idMagia INTEGER PRIMARY KEY," +
                 "nomeMagia VARCHAR(100)," +
                 "descrizione VARCHAR(255)," +
-                "puntiPotenza INT" +
+                "puntiPotenza INT," +
+                "FOREIGN KEY(idMagia) REFERENCES magiePersonaggi(idMagia)" +
                 ")";
 
         try (Statement statement = connection.createStatement()) {
             statement.execute(sqlPersonaggi);
+            statement.execute(sqlMagiePersonaggio);
             statement.execute(sqlMagie);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,7 +66,7 @@ public class Database {
     // punto di domand a
     // come secondo il valore vero e proprio che si passera alla query
     public void creaPersonaggioInDB(EntitaGiocante personaggio) {
-        String sql = "INSERT INTO personaggi (id, nome, lV, esperienza, isAllley, vita, atkBase, defBase, velocita) " +
+        String sql = "INSERT INTO personaggi (idPersonaggio, nome, lV, esperienza, isAllley, vita, atkBase, defBase, velocita) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -139,7 +145,7 @@ public class Database {
     public boolean verificaSeMagiaEsisteInDB(int idPersonaggio, String nomeMagia) {
         String sql = "SELECT COUNT(*) AS countMagie " +
                 "FROM magie " +
-                "JOIN personaggi ON magie.idPersonaggioMagia = personaggi.id " +
+                "JOIN personaggi ON magie.idMagia = personaggi.idPersonaggio " +
                 "WHERE magie.nomeMagia = ? AND magie.idPersonaggioMagia = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
