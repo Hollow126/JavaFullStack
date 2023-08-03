@@ -33,8 +33,7 @@ public class Database {
                 "atkBase INT," +
                 "defBase INT," +
                 "velocita INT," +
-                "idMagia INT" +
-                // "FOREIGN KEY (idMagia) REFERENCES magie(idMagia)" +
+                "FOREIGN KEY(id) REFERENCES magie(idMagia)" +
                 ")";
 
         // Creazione della tabella magie con chiave primaria (idMagia)

@@ -23,7 +23,7 @@ public class App {
         boolean nightmareMode = false;
         Scanner tastiera = new Scanner(System.in);
 
-        esercizioDB();
+        // esercizioDB();
 
         // Creo una connessione al database
         String nomeDatabase = " defaultDb ";
@@ -52,6 +52,7 @@ public class App {
 
         database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio1, pallaDiFuoco);
         database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio2, pallaDiFuoco);
+        database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio1, pallaDiFuoco);
         database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio1, pallaDiFuoco);
         database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio1, pallaDiGhiaccio);
         database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio2, pallaDiGhiaccio);
@@ -204,39 +205,6 @@ public class App {
                     } catch (Exception e) {
                         System.out.println("valore non valido");
                         break;
-                    }
-                    break;
-                case "3":
-                    try {
-                        String sqlPersonaggi = "SELECT (*) FROM personaggi"; 
-                        try (Statement statement = connection.createStatement()) {
-            statement.execute(sqlPersonaggi);
-            statement.execute(sqlMagie);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-                        FileWriter csvWriter = new FileWriter("prodotti.csv");
-                        csvWriter.append("id");
-                        csvWriter.append(",");
-                        csvWriter.append("nome");
-                        csvWriter.append(",");
-                        csvWriter.append("livello");
-                        csvWriter.append(",");
-                        csvWriter.append("esp");
-                        csvWriter.append(",");
-                        csvWriter.append("vita");
-                        csvWriter.append(",");
-                        csvWriter.append("atk");
-                        csvWriter.append(",");
-                        csvWriter.append("difesa");
-                        csvWriter.append(",");
-                        csvWriter.append("velocita");
-                        csvWriter.append(",");
-                        while () {
-                            
-                        }
-                    } catch (Exception e) {
-                        System.out.println("problemi col csv");
                     }
                     break;
                 case "4":
