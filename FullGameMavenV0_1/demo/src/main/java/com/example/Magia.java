@@ -1,14 +1,19 @@
 package com.example;
 
 public class Magia {
+    int id;
     String nome;
     String descrizione;
     int pp;
 
-    public Magia(String nome, String descrizione, int pp) {
+    public Magia(int id, String nome, String descrizione, int pp) {
+        this.id = id;
         this.nome = nome;
         this.descrizione = descrizione;
         this.pp = pp;
+    }
+    public int getId(){
+        return id;
     }
 
     public String getNome() {

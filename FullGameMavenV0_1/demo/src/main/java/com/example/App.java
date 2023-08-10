@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.FileReader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,10 +36,22 @@ public class App {
 
         Guerriero personaggio1 = new Guerriero(1, "Personaggio1", 5, 100, false, 100.0, 20, 10, 50);
         Guerriero personaggio2 = new Guerriero(2, "Personaggio2", 8, 200, true, 150.0, 30, 15, 70);
+        // Creo 10 oggetti Magia con dati di esempio
+        List<Magia> magie = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            magie.add(new Magia(i, "Magia" + i, "Descrizione Magia " + i, 10 + i));
+        }
 
-        Magia pallaDiFuoco = new Magia("palla di fuoco ", "prova", 5);
-        Magia pallaDiGhiaccio = new Magia("palla di ghiaccio ", "prova",
+        // Inserisco gli oggetti Magia nel database
+        for (Magia magia : magie) {
+            database.creaMag1iaInDB(magia);
+        }
+
+        Magia pallaDiFuoco = new Magia(12, "palla di fuoco ", "prova", 5);
+        Magia pallaDiGhiaccio = new Magia(13, "palla di ghiaccio ", "prova",
                 30);
+        database.creaMag1iaInDB(pallaDiGhiaccio);
+        database.creaMag1iaInDB(pallaDiFuoco);
         personaggio1.listaMagie.add(pallaDiFuoco);
         personaggio2.listaMagie.add(pallaDiFuoco);
         database.creaPersonaggioInDB(personaggio1);
@@ -49,6 +62,7 @@ public class App {
         database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio2, pallaDiFuoco);
         database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio1, pallaDiFuoco);
         database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio1, pallaDiGhiaccio);
+        database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio2, pallaDiGhiaccio);
         database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio2, pallaDiGhiaccio);
         database.creaMagiaPerPersonaggioSeNonEsisteDB(personaggio2, pallaDiGhiaccio);
 
