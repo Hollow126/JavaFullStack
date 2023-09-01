@@ -1,0 +1,138 @@
+.primo-container {
+    background-color: rgb(131, 7, 7);
+}
+
+
+.top-border-first {
+    display: flex;
+    padding-top: 0.5em;
+    border-right: 0.5px solid #eee;
+    justify-content: start;
+}
+
+.top-border {
+    display: flex;
+    padding-top: 0.5em;
+    border-right: 0.5px solid #eee;
+    justify-content: center;
+
+}
+
+.top-border-end {
+    display: flex;
+    padding-top: 0.5em;
+    padding-right: 0.6px;
+    border-right: 0.5px solid #eee;
+    justify-content: end;
+}
+
+.top-border p {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.bottone-top {
+    margin-left: 0.5em;
+    height: 2em;
+    background-color: rgb(67, 2, 2);
+    color: white;
+}
+
+.secondo-container {
+    padding-top: 2em;
+}
+
+.undertop-style {
+    display: flex;
+}
+
+.logo-container {
+    margin-right: 0.8em;
+    border: 2px solid #eee;
+    border-radius: 10000px;
+    max-height: 5.3em;
+    max-width: 5.3em;
+}
+
+#logo {
+    height: 5em;
+    width: 5em;
+}
+
+.undertop-mid-style {
+    padding-top: 0.5em;
+    display: flex;
+    justify-content: center;
+}
+
+.icon-container {
+    margin-left: 0.3em;
+    display: inline;
+}
+
+.undertop-end-style {
+    padding-top: 0.5em;
+    padding-right: 0.6em;
+    display: flex;
+    justify-content: end;
+}
+
+.bottone-undertop {
+    margin-left: 0.5em;
+    height: 2em;
+    border-radius: 100em;
+}
+
+.navbar-evenly {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.navbarprova:hover {
+    font-size: 1.4em;
+    box-shadow: 1px 20px 5px 10px white,20px 0px 5px 0px white,-20px 0px 5px 0px white,20px 20px 5px 0px white, -20px 20px 5px 0px white;
+}
+
+.navbarprova {
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+
+.quarto-container {
+    background-color: rgb(238, 18, 18);
+    color: white;
+}
+
+li {
+    list-style-type: none;
+    font-size: 0.8em;
+}
+
+ul>li:first-of-type {
+    font-weight: bold;
+    margin-bottom: 0.7em;
+    font-size: 1.2em;
+}
+
+.contatti >li:nth-child(2){
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.lista-inline > li:not(:first-child){
+    margin-right: 0.8em ;
+    display: inline;
+}
+
+@media only screen and (max-width: 1000px) {
+    .main-content{
+        width: 100%;
+        color:palegoldenrod;
+    }
+    body {
+      background-color: lightblue;
+    }
+  }
